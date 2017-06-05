@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
 public struct pos2D{
+	public pos2D(int a,int b) {
+    x = a; y = b;
+  	}
 	public int x;
 	public int y;
 }
@@ -22,6 +25,8 @@ public class PlayerMovementController : MonoBehaviour {
 	//CONSTANTS
 	private float playerYOffset=0.25f;
 	private float raycasYOffset=0.1f;
+	[HideInInspector]
+	public pos2D[] orientation = new pos2D[4] {new pos2D(-1,0),new pos2D(1,0),new pos2D(0,-1),new pos2D(0,1)};
 
 	void Awake () {
 		floorSpots=mapFloor();
@@ -32,16 +37,16 @@ public class PlayerMovementController : MonoBehaviour {
 
 		//Controls
 		if(Input.GetKeyDown(KeyCode.A)){
-			movePlayer(-1,0);
+			movePlayer(orientation[0]);
 		}
 		if(Input.GetKeyDown(KeyCode.D)){
-			movePlayer(1,0);
+			movePlayer(orientation[1]);
 		}
 		if(Input.GetKeyDown(KeyCode.W)){
-			movePlayer(0,-1);
+			movePlayer(orientation[2]);
 		}
 		if(Input.GetKeyDown(KeyCode.S)){
-			movePlayer(0,1);
+			movePlayer(orientation[3]);
 		}
 
 		if(shakeTimer>=0){
@@ -76,10 +81,10 @@ public class PlayerMovementController : MonoBehaviour {
 	}
 
 	//Moves...
-	private void movePlayer(int x, int y){
+	private void movePlayer(pos2D move){
 		pos2D tempPos = playerPos;
-		tempPos.x+=x;
-		tempPos.y+=y;
+		tempPos.x+=move.x;
+		tempPos.y+=move.y;
 		//Test if Valid Spot in Array
 		if(floorSpots.GetLength(0)>tempPos.y && tempPos.y>=0 && 
 			floorSpots.GetLength(1)>tempPos.x && tempPos.x>=0){
@@ -89,15 +94,14 @@ public class PlayerMovementController : MonoBehaviour {
 			RaycastHit hit;
 			if(Physics.Raycast(orig, directionRay,out hit,1) &&
 				hit.collider.GetComponent<Blockade>()!=null){
-				shake(x==0);
+				shake(move.x==0);
 			}else playerPos=tempPos;
-		}else shake(x==0);
+		}else shake(move.x==0);
 	}
 
 	float shakeTimer;
 	//Shakes things up :D
 	private void shake(bool side){
-		Debug.Log("SHAKE");
 		sideShake=side;
 		shakeTimer=shakeTime;
 	}
@@ -117,7 +121,7 @@ public class PlayerMovementController : MonoBehaviour {
 			int s=0;
 			foreach(Transform spot in row){
 				map[r,s]=spot;
-				spot.Translate(Vector3.up * Random.Range(-0.5f,0.5f), Space.World); 
+				spot.Translate(Vector3.up * Random.Range(0f,1.5f), Space.World); 
 				s++;
 			}
 			r++;
