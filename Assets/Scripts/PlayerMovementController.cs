@@ -11,8 +11,10 @@ public struct pos2D{
 public class PlayerMovementController : MonoBehaviour {
 
 	[Header("Transform Objects")]
+	public Transform Board;
 	public Transform FloorSpots;
 	public Transform Player;
+	public Transform debugCross;
 	public pos2D playerPos;
 
 	[Header("Shake Options")]
@@ -20,21 +22,25 @@ public class PlayerMovementController : MonoBehaviour {
 	public float shakeStrength;
 
 	private Transform[,] floorSpots;
+	private pos2D centerMap = new pos2D(3,3);
 	private bool sideShake;
 
 	//CONSTANTS
 	private float playerYOffset=0.25f;
 	private float raycasYOffset=0.1f;
+	//private int midMap = 4;
 	[HideInInspector]
 	public pos2D[] orientation = new pos2D[4] {new pos2D(-1,0),new pos2D(1,0),new pos2D(0,-1),new pos2D(0,1)};
 
 	void Awake () {
 		floorSpots=mapFloor();
 		setPlayer(playerPos.x,playerPos.y);
+		//DEBUG REMOVE
+		debugCross.position=getTilePos(centerMap.x,centerMap.y,0.5f);
 	}
 
 	void Update(){
-
+		debugCross.position=getTilePos(centerMap.x,centerMap.y,0.5f);
 		//Controls
 		if(Input.GetKeyDown(KeyCode.A)){
 			movePlayer(orientation[0]);
@@ -66,7 +72,12 @@ public class PlayerMovementController : MonoBehaviour {
 	public float smoothTimeZ;
 
 	void FixedUpdate(){
-		Vector3 anchorPos = getTilePos(playerPos.x,playerPos.y,playerYOffset);
+		//Vector3 anchorPos = getTilePos(playerPos.x,playerPos.y,playerYOffset);
+		//REMOVE
+		Vector3 pos = floorSpots[playerPos.y,playerPos.x].position;
+		Vector3 anchorPos = new Vector3(pos.x,playerYOffset,pos.z);
+
+
 		float posX = Mathf.SmoothDamp(Player.position.x, anchorPos.x, ref velocity.x, smoothTimeX);
 		float posZ = Mathf.SmoothDamp(Player.position.z, anchorPos.z, ref velocity.y, smoothTimeZ);
 		Player.position = new Vector3(posX,playerYOffset,posZ);
@@ -84,7 +95,8 @@ public class PlayerMovementController : MonoBehaviour {
 	private void movePlayer(pos2D move){
 		pos2D tempPos = playerPos;
 		tempPos.x+=move.x;
-		tempPos.y+=move.y;
+		tempPos.y+=move.y;	
+
 		//Test if Valid Spot in Array
 		if(floorSpots.GetLength(0)>tempPos.y && tempPos.y>=0 && 
 			floorSpots.GetLength(1)>tempPos.x && tempPos.x>=0
@@ -96,7 +108,37 @@ public class PlayerMovementController : MonoBehaviour {
 			if(Physics.Raycast(orig, directionRay,out hit,1) &&
 				hit.collider.GetComponent<Blockade>()!=null){
 				shake(move.x==0);
-			}else playerPos=tempPos;
+			}else {
+				
+				//SHIFT MAP
+				int check = 4;
+				if(centerMap.x==playerPos.x || centerMap.y==playerPos.y
+					&& !(centerMap.x==playerPos.x && centerMap.y==playerPos.y)){
+					pos2D farPos = new pos2D(playerPos.x+(check*move.x),playerPos.y+(check*move.y));
+					//Shift Y
+					if(centerMap.y==playerPos.y){
+						farPos.x=playerPos.x;
+						if(floorSpots.GetLength(1)>farPos.y && farPos.y>=0
+						&& getTilePos(farPos.x,farPos.y,raycasYOffset)!=Vector3.zero){
+							Board.Translate(-0.75f*move.y,0,0);
+							centerMap = new pos2D(centerMap.x,centerMap.y+(1*move.y));
+						}
+					}
+					//Shift X
+					else if(centerMap.x==playerPos.x){
+						farPos.y=playerPos.y;
+						if(floorSpots.GetLength(1)>farPos.x && farPos.x>=0
+						&& getTilePos(farPos.x,farPos.y,raycasYOffset)!=Vector3.zero){
+							Board.Translate(0,0,-0.75f*move.x);
+							centerMap = new pos2D(centerMap.x+(-1*move.x),centerMap.y);
+
+						}
+					}
+				}
+				debugCross.position=getTilePos(centerMap.x,centerMap.y,0.5f);
+				Debug.Log("X: "+playerPos.x+" Y: "+playerPos.y + " - "+centerMap.x+"-"+centerMap.y);
+				playerPos=tempPos;
+			}
 		}else shake(move.x==0);
 	}
 
@@ -115,9 +157,9 @@ public class PlayerMovementController : MonoBehaviour {
 
 		//Init Output Multi-Array
 		pos2D maxMap = new pos2D(0,0);
-		foreach(Transform row in rows){if(row.childCount>maxMap.x)maxMap.x=row.childCount;}
-		for(int i=0;i<maxMap.x;i++){int m=0;foreach(Transform row in rows)
-		{if(i<row.childCount)m++;}if(m>maxMap.y)maxMap.y=m;}Transform[,] map = new Transform[maxMap.x,maxMap.y];
+		foreach(Transform row in rows){if(row.childCount>maxMap.y)maxMap.y=row.childCount;}
+		for(int i=0;i<maxMap.y;i++){int m=0;foreach(Transform row in rows)
+		{if(i<row.childCount)m++;}if(m>maxMap.x)maxMap.x=m;}Transform[,] map = new Transform[maxMap.x,maxMap.x];
 
 		//Populate Multi-Array by Mapping
 		int r=0;
@@ -126,7 +168,7 @@ public class PlayerMovementController : MonoBehaviour {
 			foreach(Transform plate in row){
 				if(plate.gameObject.activeInHierarchy){
 						map[r,s]=plate;
-						plate.Translate(Vector3.up * Random.Range(0f,1.5f), Space.World); 
+						plate.Translate(Vector3.up * Random.Range(0.2f,1.5f), Space.World); 
 					}
 			s++;}
 		r++;}
@@ -137,11 +179,13 @@ public class PlayerMovementController : MonoBehaviour {
 
 	//Gets tile pos with y offset from floorspots
 	private Vector3 getTilePos(int x,int y,float yOffset){
-		Debug.Log("X: "+x+" Y: "+y);
+		//Debug.Log("Testing for X: "+x+" Y: "+y);
 		if(floorSpots[y,x]!=null){
+			//Debug.Log("Found");
 			Vector3 pos = floorSpots[y,x].position;
 			return new Vector3(pos.x,yOffset,pos.z);
 		}
-		else {return Vector3.zero;}
+		else {//Debug.Log("Failed");
+		return Vector3.zero;}
 	}
 }
