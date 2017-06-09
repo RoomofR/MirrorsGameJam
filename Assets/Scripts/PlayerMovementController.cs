@@ -87,7 +87,8 @@ public class PlayerMovementController : MonoBehaviour {
 		tempPos.y+=move.y;
 		//Test if Valid Spot in Array
 		if(floorSpots.GetLength(0)>tempPos.y && tempPos.y>=0 && 
-			floorSpots.GetLength(1)>tempPos.x && tempPos.x>=0){
+			floorSpots.GetLength(1)>tempPos.x && tempPos.x>=0
+			&& getTilePos(tempPos.x,tempPos.y,raycasYOffset)!=Vector3.zero){
 			//Test if blockade found
 			Vector3 orig = new Vector3(Player.position.x,raycasYOffset,Player.position.z);
 			Vector3 directionRay = getTilePos(tempPos.x,tempPos.y,raycasYOffset) - orig;		
@@ -113,26 +114,43 @@ public class PlayerMovementController : MonoBehaviour {
 		int rx=0;foreach(Transform row in FloorSpots){rows[rx]=row;rx++;}
 
 		//Init Output Multi-Array
-		Transform[,] map = new Transform[FloorSpots.childCount,rows[0].childCount];
+		pos2D maxMap = new pos2D(0,0);
+		foreach(Transform row in rows){if(row.childCount>maxMap.x)maxMap.x=row.childCount;}
+		for(int i=0;i<maxMap.x;i++){int m=0;foreach(Transform row in rows)
+		{if(i<row.childCount)m++;}if(m>maxMap.y)maxMap.y=m;}Transform[,] map = new Transform[maxMap.x,maxMap.y];
 
-		//Populate Multi-Array
+
+		//Populate Multi-Array by Mapping
 		int r=0;
 		foreach(Transform row in rows){
 			int s=0;
-			foreach(Transform spot in row){
-				map[r,s]=spot;
-				spot.Translate(Vector3.up * Random.Range(0f,1.5f), Space.World); 
-				s++;
-			}
-			r++;
-		}
+			int prevRowCount = 0;
+			foreach(Transform plate in row){
+				Vector3 prevPos;
+
+				if(plate.gameObject.activeInHierarchy){
+					map[r,s]=plate;
+					plate.Translate(Vector3.up * Random.Range(0f,1.5f), Space.World); 
+				}
+
+				prevPos=plate.position;
+
+			s++;}
+
+			prevRowCount=row.childCount;
+		r++;}
+
 		//Returns Map
 		return map;
 	}
 
 	//Gets tile pos with y offset from floorspots
 	private Vector3 getTilePos(int x,int y,float yOffset){
-		Vector3 pos = floorSpots[y,x].position;
-		return new Vector3(pos.x,yOffset,pos.z);
+		Debug.Log("X: "+x+" Y: "+y);
+		if(floorSpots[y,x]!=null){
+			Vector3 pos = floorSpots[y,x].position;
+			return new Vector3(pos.x,yOffset,pos.z);
+		}
+		else {return Vector3.zero;}
 	}
 }
