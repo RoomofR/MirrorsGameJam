@@ -119,25 +119,16 @@ public class PlayerMovementController : MonoBehaviour {
 		for(int i=0;i<maxMap.x;i++){int m=0;foreach(Transform row in rows)
 		{if(i<row.childCount)m++;}if(m>maxMap.y)maxMap.y=m;}Transform[,] map = new Transform[maxMap.x,maxMap.y];
 
-
 		//Populate Multi-Array by Mapping
 		int r=0;
 		foreach(Transform row in rows){
 			int s=0;
-			int prevRowCount = 0;
 			foreach(Transform plate in row){
-				Vector3 prevPos;
-
 				if(plate.gameObject.activeInHierarchy){
-					map[r,s]=plate;
-					plate.Translate(Vector3.up * Random.Range(0f,1.5f), Space.World); 
-				}
-
-				prevPos=plate.position;
-
+						map[r,s]=plate;
+						plate.Translate(Vector3.up * Random.Range(0f,1.5f), Space.World); 
+					}
 			s++;}
-
-			prevRowCount=row.childCount;
 		r++;}
 
 		//Returns Map
