@@ -28,19 +28,16 @@ public class PlayerMovementController : MonoBehaviour {
 	//CONSTANTS
 	private float playerYOffset=0.25f;
 	private float raycasYOffset=0.1f;
-	//private int midMap = 4;
+
 	[HideInInspector]
 	public pos2D[] orientation = new pos2D[4] {new pos2D(-1,0),new pos2D(1,0),new pos2D(0,-1),new pos2D(0,1)};
 
 	void Awake () {
 		floorSpots=mapFloor();
 		setPlayer(playerPos.x,playerPos.y);
-		//DEBUG REMOVE
-		debugCross.position=getTilePos(centerMap.x,centerMap.y,0.5f);
 	}
 
 	void Update(){
-		debugCross.position=getTilePos(centerMap.x,centerMap.y,0.5f);
 		//Controls
 		if(Input.GetKeyDown(KeyCode.A)){
 			movePlayer(orientation[0]);
@@ -61,7 +58,6 @@ public class PlayerMovementController : MonoBehaviour {
 			if(!sideShake)shakePlayerPos.z+=shakePos.y;
 			else shakePlayerPos.x+=shakePos.x;
 			Player.position = shakePlayerPos;
-			//Player.position = new Vector3(Player.position.x,Player.position.y,Player.position.z+shakePos.y);
 			shakeTimer-=Time.deltaTime;
 		}
 	}
@@ -72,12 +68,7 @@ public class PlayerMovementController : MonoBehaviour {
 	public float smoothTimeZ;
 
 	void FixedUpdate(){
-		//Vector3 anchorPos = getTilePos(playerPos.x,playerPos.y,playerYOffset);
-		//REMOVE
-		Vector3 pos = floorSpots[playerPos.y,playerPos.x].position;
-		Vector3 anchorPos = new Vector3(pos.x,playerYOffset,pos.z);
-
-
+		Vector3 anchorPos = getTilePos(playerPos.x,playerPos.y,playerYOffset);
 		float posX = Mathf.SmoothDamp(Player.position.x, anchorPos.x, ref velocity.x, smoothTimeX);
 		float posZ = Mathf.SmoothDamp(Player.position.z, anchorPos.z, ref velocity.y, smoothTimeZ);
 		Player.position = new Vector3(posX,playerYOffset,posZ);
@@ -135,8 +126,8 @@ public class PlayerMovementController : MonoBehaviour {
 						}
 					}
 				}
-				debugCross.position=getTilePos(centerMap.x,centerMap.y,0.5f);
-				Debug.Log("X: "+playerPos.x+" Y: "+playerPos.y + " - "+centerMap.x+"-"+centerMap.y);
+				//debugCross.position=getTilePos(centerMap.x,centerMap.y,0.5f);
+				//Debug.Log("X: "+playerPos.x+" Y: "+playerPos.y + " - "+centerMap.x+"-"+centerMap.y);
 				playerPos=tempPos;
 			}
 		}else shake(move.x==0);
@@ -179,13 +170,10 @@ public class PlayerMovementController : MonoBehaviour {
 
 	//Gets tile pos with y offset from floorspots
 	private Vector3 getTilePos(int x,int y,float yOffset){
-		//Debug.Log("Testing for X: "+x+" Y: "+y);
 		if(floorSpots[y,x]!=null){
-			//Debug.Log("Found");
 			Vector3 pos = floorSpots[y,x].position;
 			return new Vector3(pos.x,yOffset,pos.z);
 		}
-		else {//Debug.Log("Failed");
-		return Vector3.zero;}
+		else return Vector3.zero;
 	}
 }
