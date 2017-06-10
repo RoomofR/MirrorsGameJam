@@ -17,6 +17,8 @@ public class PlayerMovementController : MonoBehaviour {
 	public Transform debugCross;
 	public pos2D playerPos;
 
+	private Vector3 boardTargetPos= new Vector3(2.5f,-5.0f,-2.5f);
+
 	[Header("Shake Options")]
 	public float shakeTime;
 	public float shakeStrength;
@@ -64,14 +66,25 @@ public class PlayerMovementController : MonoBehaviour {
 
 	//Shake
 	Vector2 velocity;
+	Vector2 velocityB;
+	[Header("Smoothing Player Options")]
 	public float smoothTimeX;
 	public float smoothTimeZ;
+	[Header("Smoothing Board Options")]
+	public float boardTime;
+	private float boardTimer;
 
 	void FixedUpdate(){
+		//Player
 		Vector3 anchorPos = getTilePos(playerPos.x,playerPos.y,playerYOffset);
 		float posX = Mathf.SmoothDamp(Player.position.x, anchorPos.x, ref velocity.x, smoothTimeX);
 		float posZ = Mathf.SmoothDamp(Player.position.z, anchorPos.z, ref velocity.y, smoothTimeZ);
 		Player.position = new Vector3(posX,playerYOffset,posZ);
+
+		//Board
+		posX = Mathf.SmoothDamp(Board.position.x, boardTargetPos.x, ref velocityB.x, boardTime);
+		posZ = Mathf.SmoothDamp(Board.position.z, boardTargetPos.z, ref velocityB.y, boardTime);
+		Board.position = new Vector3(posX,boardTargetPos.y,posZ);
 	}
 
 	//Set Player Location
@@ -111,7 +124,10 @@ public class PlayerMovementController : MonoBehaviour {
 						farPos.x=playerPos.x;
 						if(floorSpots.GetLength(1)>farPos.y && farPos.y>=0
 						&& getTilePos(farPos.x,farPos.y,raycasYOffset)!=Vector3.zero){
-							Board.Translate(-0.75f*move.y,0,0);
+
+							//Board.Translate(-0.75f*move.y,0,0);
+							boardTargetPos=new Vector3(boardTargetPos.x+(-0.75f*move.y),boardTargetPos.y,boardTargetPos.z);
+
 							centerMap = new pos2D(centerMap.x,centerMap.y+(1*move.y));
 						}
 					}
@@ -120,7 +136,10 @@ public class PlayerMovementController : MonoBehaviour {
 						farPos.y=playerPos.y;
 						if(floorSpots.GetLength(1)>farPos.x && farPos.x>=0
 						&& getTilePos(farPos.x,farPos.y,raycasYOffset)!=Vector3.zero){
-							Board.Translate(0,0,-0.75f*move.x);
+
+							//Board.Translate(0,0,-0.75f*move.x);
+							boardTargetPos=new Vector3(boardTargetPos.x,boardTargetPos.y,boardTargetPos.z+(-0.75f*move.x));
+
 							centerMap = new pos2D(centerMap.x+(-1*move.x),centerMap.y);
 
 						}
