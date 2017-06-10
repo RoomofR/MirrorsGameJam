@@ -11,20 +11,15 @@ public struct pos2D{
 public class PlayerMovementController : MonoBehaviour {
 
 	[Header("Transform Objects")]
-	public Transform Board;
 	public Transform FloorSpots;
 	public Transform Player;
-	public Transform debugCross;
-	public pos2D playerPos;
-
-	private Vector3 boardTargetPos= new Vector3(2.5f,-5.0f,-2.5f);
+	public pos2D playerPos = new pos2D(0,0);
 
 	[Header("Shake Options")]
 	public float shakeTime;
 	public float shakeStrength;
 
 	private Transform[,] floorSpots;
-	private pos2D centerMap = new pos2D(3,3);
 	private bool sideShake;
 
 	//CONSTANTS
@@ -66,13 +61,9 @@ public class PlayerMovementController : MonoBehaviour {
 
 	//Shake
 	Vector2 velocity;
-	Vector2 velocityB;
 	[Header("Smoothing Player Options")]
 	public float smoothTimeX;
 	public float smoothTimeZ;
-	[Header("Smoothing Board Options")]
-	public float boardTime;
-	private float boardTimer;
 
 	void FixedUpdate(){
 		//Player
@@ -80,11 +71,6 @@ public class PlayerMovementController : MonoBehaviour {
 		float posX = Mathf.SmoothDamp(Player.position.x, anchorPos.x, ref velocity.x, smoothTimeX);
 		float posZ = Mathf.SmoothDamp(Player.position.z, anchorPos.z, ref velocity.y, smoothTimeZ);
 		Player.position = new Vector3(posX,playerYOffset,posZ);
-
-		//Board
-		posX = Mathf.SmoothDamp(Board.position.x, boardTargetPos.x, ref velocityB.x, boardTime);
-		posZ = Mathf.SmoothDamp(Board.position.z, boardTargetPos.z, ref velocityB.y, boardTime);
-		Board.position = new Vector3(posX,boardTargetPos.y,posZ);
 	}
 
 	//Set Player Location
@@ -112,43 +98,7 @@ public class PlayerMovementController : MonoBehaviour {
 			if(Physics.Raycast(orig, directionRay,out hit,1) &&
 				hit.collider.GetComponent<Blockade>()!=null){
 				shake(move.x==0);
-			}else {
-				
-				//SHIFT MAP
-				int check = 4;
-				if(centerMap.x==playerPos.x || centerMap.y==playerPos.y
-					&& !(centerMap.x==playerPos.x && centerMap.y==playerPos.y)){
-					pos2D farPos = new pos2D(playerPos.x+(check*move.x),playerPos.y+(check*move.y));
-					//Shift Y
-					if(centerMap.y==playerPos.y){
-						farPos.x=playerPos.x;
-						if(floorSpots.GetLength(1)>farPos.y && farPos.y>=0
-						&& getTilePos(farPos.x,farPos.y,raycasYOffset)!=Vector3.zero){
-
-							//Board.Translate(-0.75f*move.y,0,0);
-							boardTargetPos=new Vector3(boardTargetPos.x+(-0.75f*move.y),boardTargetPos.y,boardTargetPos.z);
-
-							centerMap = new pos2D(centerMap.x,centerMap.y+(1*move.y));
-						}
-					}
-					//Shift X
-					else if(centerMap.x==playerPos.x){
-						farPos.y=playerPos.y;
-						if(floorSpots.GetLength(1)>farPos.x && farPos.x>=0
-						&& getTilePos(farPos.x,farPos.y,raycasYOffset)!=Vector3.zero){
-
-							//Board.Translate(0,0,-0.75f*move.x);
-							boardTargetPos=new Vector3(boardTargetPos.x,boardTargetPos.y,boardTargetPos.z+(-0.75f*move.x));
-
-							centerMap = new pos2D(centerMap.x+(-1*move.x),centerMap.y);
-
-						}
-					}
-				}
-				//debugCross.position=getTilePos(centerMap.x,centerMap.y,0.5f);
-				//Debug.Log("X: "+playerPos.x+" Y: "+playerPos.y + " - "+centerMap.x+"-"+centerMap.y);
-				playerPos=tempPos;
-			}
+			}else {playerPos=tempPos;}
 		}else shake(move.x==0);
 	}
 
@@ -169,7 +119,7 @@ public class PlayerMovementController : MonoBehaviour {
 		pos2D maxMap = new pos2D(0,0);
 		foreach(Transform row in rows){if(row.childCount>maxMap.y)maxMap.y=row.childCount;}
 		for(int i=0;i<maxMap.y;i++){int m=0;foreach(Transform row in rows)
-		{if(i<row.childCount)m++;}if(m>maxMap.x)maxMap.x=m;}Transform[,] map = new Transform[maxMap.x,maxMap.x];
+		{if(i<row.childCount)m++;}if(m>maxMap.x)maxMap.x=m;}Transform[,] map = new Transform[maxMap.x,maxMap.y];
 
 		//Populate Multi-Array by Mapping
 		int r=0;
@@ -178,12 +128,13 @@ public class PlayerMovementController : MonoBehaviour {
 			foreach(Transform plate in row){
 				if(plate.gameObject.activeInHierarchy){
 						map[r,s]=plate;
-						plate.Translate(Vector3.up * Random.Range(0.2f,1.5f), Space.World); 
+						//plate.Translate(Vector3.up * Random.Range(0.2f,1.5f), Space.World); 
 					}
 			s++;}
 		r++;}
 
 		//Returns Map
+		Debug.Log(map.GetLength(0)+"/"+map.GetLength(1));
 		return map;
 	}
 
@@ -195,4 +146,6 @@ public class PlayerMovementController : MonoBehaviour {
 		}
 		else return Vector3.zero;
 	}
+
+
 }
