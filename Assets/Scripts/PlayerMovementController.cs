@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[System.Serializable]
 public struct pos2D{
 	public pos2D(int a,int b) {
     x = a; y = b;

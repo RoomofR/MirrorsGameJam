@@ -2,13 +2,23 @@
 
 public class LevelManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+	public int LevelLoaded;
+
+
+	void OnEnable(){
+		EventManager.LevelLoad += loadLevel;
+		EventManager.LevelUnload += unloadLevel;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	void OnDisable(){
+		EventManager.LevelLoad -= loadLevel;
+		EventManager.LevelUnload -= unloadLevel;
+	}
+
+	private void loadLevel(string scene){
+
+	}
+
+	private void unloadLevel(string scene){
+
 	}
 }
