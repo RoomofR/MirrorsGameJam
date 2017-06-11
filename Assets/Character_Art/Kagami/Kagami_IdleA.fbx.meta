@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: c318d9e83447f16478b48104e96f394f
-timeCreated: 1497137342
+guid: c5a7d07eb6787984fbc8427798af20b5
+timeCreated: 1497139024
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -323,24 +323,28 @@ ModelImporter:
     400312: SkirtRing_03
     400314: Spine_Curve
     400316: Spine_ikHandle
-    4300000: Mouth
-    4300002: Eye_L
-    4300004: Eye_R
-    4300006: Hair
-    4300008: ShoeLeft
-    4300010: ShoeRight
-    4300012: Belt
-    4300014: Hat
+    4300000: Body
+    4300002: Mouth
+    4300004: Eye_L
+    4300006: Eye_R
+    4300008: Hair
+    4300010: ShoeLeft
+    4300012: ShoeRight
+    4300014: Belt
+    4300016: Hat
+    4300018: Robe
     7400000: ChibiChar_Idle
     9500000: //RootNode
     13700000: Belt
-    13700002: Eye_L
-    13700004: Eye_R
-    13700006: Hair
-    13700008: Hat
-    13700010: Mouth
-    13700012: ShoeLeft
-    13700014: ShoeRight
+    13700002: Body
+    13700004: Eye_L
+    13700006: Eye_R
+    13700008: Hair
+    13700010: Hat
+    13700012: Mouth
+    13700014: Robe
+    13700016: ShoeLeft
+    13700018: ShoeRight
   materials:
     importMaterials: 1
     materialName: 0

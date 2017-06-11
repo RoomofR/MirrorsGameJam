@@ -23,7 +23,7 @@ public class PlayerMovementController : MonoBehaviour {
 	private bool sideShake;
 
 	//CONSTANTS
-	private float playerYOffset=0.25f;
+	private float playerYOffset=0.05f;
 	private float raycasYOffset=0.1f;
 
 	[HideInInspector]
@@ -35,6 +35,10 @@ public class PlayerMovementController : MonoBehaviour {
 	}
 
 	void Update(){
+
+        // Do we need to ROTATE the character first?
+        // Turn Left/Right animation could be played, then, if KeyDown is still true, move teh character and play the jump anim
+
 		//Controls
 		if(Input.GetKeyDown(KeyCode.A)){
 			movePlayer(orientation[0]);
