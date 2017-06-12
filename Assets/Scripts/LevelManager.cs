@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
@@ -16,11 +15,12 @@ public class LevelManager : MonoBehaviour {
 		EventManager.LevelUnload -= unloadLevel;
 	}
 
-	private void loadLevel(string scene){
-
+	private void loadLevel(string sceneName){
+		Scene scene = SceneManager.GetSceneByName("Levels/"+sceneName);
+		SceneManager.LoadScene(scene, LoadSceneMode.Additive);
 	}
 
-	private void unloadLevel(string scene){
+	private void unloadLevel(string sceneName){
 
 	}
 }
