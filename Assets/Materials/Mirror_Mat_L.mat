@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: new_Mirror_Mat
+  m_Name: Mirror_Mat_L
   m_Shader: {fileID: 4800000, guid: cadc910b8ae53394bbc8df9b20516859, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
