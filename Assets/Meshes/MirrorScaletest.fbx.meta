@@ -1,45 +1,15 @@
 fileFormatVersion: 2
-guid: 018812ae72ca3d54b8a7279a78d920f1
-timeCreated: 1497228849
+guid: bbd019a903d4b8d41928b25d83f89a78
+timeCreated: 1497272152
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: MirrorScaleTest
-    100002: //RootNode
-    100004: MirrorScaleTest1
-    100006: MirrorScaleTest2
-    100008: MirrorScaleTest3
-    100010: MirrorScaleTest4
-    100012: MirrorScaleTest5
-    100014: MirrorScaleTest6
-    100016: MirrorScaleTest7
-    100018: transform1
-    100020: transform2
-    100022: transform3
-    100024: transform4
-    100026: transform5
-    100028: transform6
-    100030: transform7
-    400000: MirrorScaleTest
-    400002: //RootNode
-    400004: MirrorScaleTest1
-    400006: MirrorScaleTest2
-    400008: MirrorScaleTest3
-    400010: MirrorScaleTest4
-    400012: MirrorScaleTest5
-    400014: MirrorScaleTest6
-    400016: MirrorScaleTest7
-    400018: transform1
-    400020: transform2
-    400022: transform3
-    400024: transform4
-    400026: transform5
-    400028: transform6
-    400030: transform7
-    2300000: MirrorScaleTest7
-    3300000: MirrorScaleTest7
-    4300000: MirrorScaleTest7
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Mirror_
   materials:
     importMaterials: 1
     materialName: 0
