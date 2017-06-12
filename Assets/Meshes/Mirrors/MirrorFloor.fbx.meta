@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: bbd019a903d4b8d41928b25d83f89a78
-timeCreated: 1497272152
+guid: f73fb000028d0c345bddc05134dc5b77
+timeCreated: 1497295266
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,8 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Mirror_
+    4300000: Mirror_Floor
+    4300002: Mirror_Square
   materials:
     importMaterials: 1
     materialName: 0
