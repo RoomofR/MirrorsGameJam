@@ -16,8 +16,8 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	private void loadLevel(string sceneName){
-		Scene scene = SceneManager.GetSceneByName("Levels/"+sceneName);
-		SceneManager.LoadScene(scene, LoadSceneMode.Additive);
+		//Scene scene = SceneManager.GetSceneByName("Levels/"+sceneName);
+		//SceneManager.LoadScene(scene, LoadSceneMode.Additive);
 	}
 
 	private void unloadLevel(string sceneName){

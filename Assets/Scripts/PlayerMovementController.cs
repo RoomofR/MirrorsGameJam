@@ -116,16 +116,6 @@ public class PlayerMovementController : MonoBehaviour {
             }
             else { playerPos = tempPos; }
             PlayAnimation(EAnimations.Jump);
-                                                 #region  === NOTE ON JUMP ANIMATION - Delete after reading ===
-            /*
-            Added new line here calling my new method which uses enums (for convenience) to set triggers to play the anim once.
-
-            If you have a better system, then feel free to implement it! 
-
-            You may also notice that the jump anim appears fast. I increased the speed of the anim for a better response time to the players input.
-            I will make a short animation for this next time, but we may also wish to lengthen the period over which the jump takes place too.
-            */
-            #endregion
         }
         else shake(move.x==0);
 	}
@@ -151,14 +141,17 @@ public class PlayerMovementController : MonoBehaviour {
 
 		//Populate Multi-Array by Mapping
 		int r=0;
+		//float rr=0f;float pp=0f;
 		foreach(Transform row in rows){
 			int s=0;
+			//row.position=new Vector3(rr,0,0);rr+=0.7f;
 			foreach(Transform plate in row){
 				if(plate.gameObject.activeInHierarchy){
+						//plate.position=new Vector3(plate.position.x,plate.position.y,pp);pp+=0.7f;
 						map[r,s]=plate;
 						//plate.Translate(Vector3.up * Random.Range(0.2f,1.5f), Space.World); 
 					}
-			s++;}
+			s++;}//pp=0f;	
 		r++;}
 
 		//Returns Map
