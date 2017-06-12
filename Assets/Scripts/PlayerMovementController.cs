@@ -8,6 +8,9 @@ public struct pos2D{
 	public int y;
 }
 
+    // Used to send requests to the Animator to play animations
+public enum EAnimations {Idle, Jump, TurnLeft, TurnRight }
+
 public class PlayerMovementController : MonoBehaviour {
 
 	[Header("Transform Objects")]
@@ -29,10 +32,18 @@ public class PlayerMovementController : MonoBehaviour {
 	[HideInInspector]
 	public pos2D[] orientation = new pos2D[4] {new pos2D(-1,0),new pos2D(1,0),new pos2D(0,-1),new pos2D(0,1)};
 
+    private Animator characterAnimator;
+
+    // public AnimationCurve jumpCurve; // <===== if I fail to fix the current issue with the Jump animation's Y axis, then we can use this to control height over the duration of the jump
+
 	void Awake () {
 		floorSpots=mapFloor();
 		setPlayer(playerPos.x,playerPos.y);
 	}
+
+    void Start() {
+        characterAnimator = Player.GetChild(0).GetComponent<Animator>();
+    }
 
 	void Update(){
 
@@ -89,21 +100,34 @@ public class PlayerMovementController : MonoBehaviour {
 	private void movePlayer(pos2D move){
 		pos2D tempPos = playerPos;
 		tempPos.x+=move.x;
-		tempPos.y+=move.y;	
+		tempPos.y+=move.y;
 
-		//Test if Valid Spot in Array
-		if(floorSpots.GetLength(0)>tempPos.y && tempPos.y>=0 && 
-			floorSpots.GetLength(1)>tempPos.x && tempPos.x>=0
-			&& getTilePos(tempPos.x,tempPos.y,raycasYOffset)!=Vector3.zero){
-			//Test if blockade found
-			Vector3 orig = new Vector3(Player.position.x,raycasYOffset,Player.position.z);
-			Vector3 directionRay = getTilePos(tempPos.x,tempPos.y,raycasYOffset) - orig;		
-			RaycastHit hit;
-			if(Physics.Raycast(orig, directionRay,out hit,1) &&
-				hit.collider.GetComponent<Blockade>()!=null){
-				shake(move.x==0);
-			}else {playerPos=tempPos;}
-		}else shake(move.x==0);
+        //Test if Valid Spot in Array
+        if (floorSpots.GetLength(0) > tempPos.y && tempPos.y >= 0 &&
+            floorSpots.GetLength(1) > tempPos.x && tempPos.x >= 0
+            && getTilePos(tempPos.x, tempPos.y, raycasYOffset) != Vector3.zero) {
+            //Test if blockade found
+            Vector3 orig = new Vector3(Player.position.x, raycasYOffset, Player.position.z);
+            Vector3 directionRay = getTilePos(tempPos.x, tempPos.y, raycasYOffset) - orig;
+            RaycastHit hit;
+            if (Physics.Raycast(orig, directionRay, out hit, 1) &&
+                hit.collider.GetComponent<Blockade>() != null) {
+                shake(move.x == 0);
+            }
+            else { playerPos = tempPos; }
+            PlayAnimation(EAnimations.Jump);
+                                                 #region  === NOTE ON JUMP ANIMATION - Delete after reading ===
+            /*
+            Added new line here calling my new method which uses enums (for convenience) to set triggers to play the anim once.
+
+            If you have a better system, then feel free to implement it! 
+
+            You may also notice that the jump anim appears fast. I increased the speed of the anim for a better response time to the players input.
+            I will make a short animation for this next time, but we may also wish to lengthen the period over which the jump takes place too.
+            */
+            #endregion
+        }
+        else shake(move.x==0);
 	}
 
 	float shakeTimer;
@@ -151,5 +175,28 @@ public class PlayerMovementController : MonoBehaviour {
 		else return Vector3.zero;
 	}
 
+
+        // Sends a request to the animator to play an animation
+    public void PlayAnimation(EAnimations animation) {
+        if (characterAnimator != null) {
+            switch (animation) {
+                case EAnimations.Idle:
+                    //necesary? Could force set to idle from "AnyState" ?
+                    break;
+                case EAnimations.Jump:
+                    characterAnimator.SetTrigger("tJump");
+                    break;
+                case EAnimations.TurnLeft:
+                    //characterAnimator.SetTrigger("tTurnLeft");
+                    break;
+                case EAnimations.TurnRight:
+                    // characterAnimator.SetTrigger("tTurnRight");
+                    break;
+                default:
+                    break;
+            }
+        }
+        else Debug.LogWarning("Character ANimator not found!");     
+    }
 
 }

@@ -367,7 +367,353 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: ChibiChar_Idle
+      takeName: ChibiChar_Idle
+      firstFrame: 0
+      lastFrame: 80
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Global
+        weight: 1
+      - path: Global/Controls_GRP
+        weight: 1
+      - path: Global/Controls_GRP/anim_Back_01
+        weight: 1
+      - path: Global/Controls_GRP/anim_chest_01
+        weight: 1
+      - path: Global/Controls_GRP/anim_Pelvis_01
+        weight: 1
+      - path: Global/Controls_GRP/cluster_back
+        weight: 1
+      - path: Global/Controls_GRP/cluster_chest
+        weight: 1
+      - path: Global/Controls_GRP/cluster_pelvis
+        weight: 1
+      - path: Global/Controls_GRP/cluster_ponytailBase
+        weight: 1
+      - path: Global/Controls_GRP/cluster_ponytailEnd
+        weight: 1
+      - path: Global/Controls_GRP/cluster_ponytailMid
+        weight: 1
+      - path: Global/Controls_GRP/cluster_ponytailMid/COntrol_Ponytail_Mid
+        weight: 1
+      - path: Global/Controls_GRP/cluster_ponytailMid/COntrol_Ponytail_Mid/COntrol_Ponytail_End
+        weight: 1
+      - path: Global/Controls_GRP/CntrlCurve_Robe_BackLeft
+        weight: 1
+      - path: Global/Controls_GRP/CntrlCurve_Robe_BackRight
+        weight: 1
+      - path: Global/Controls_GRP/CntrlCurve_Robe_FronRight
+        weight: 1
+      - path: Global/Controls_GRP/CntrlCurve_Robe_FrontLeft
+        weight: 1
+      - path: Global/Controls_GRP/Control_Hand_L
+        weight: 1
+      - path: Global/Controls_GRP/Control_Hand_R
+        weight: 1
+      - path: Global/Controls_GRP/Control_Leg_Left
+        weight: 1
+      - path: Global/Controls_GRP/Control_Leg_Left/JDRV_Foot_02_L
+        weight: 1
+      - path: Global/Controls_GRP/Control_Leg_Left/JDRV_Foot_02_L/JDRV_Foot_01_L
+        weight: 1
+      - path: Global/Controls_GRP/Control_Leg_Left/JDRV_Foot_02_L/JDRV_Foot_01_L/JDRV_Ankle_01_L
+        weight: 1
+      - path: Global/Controls_GRP/Control_Leg_Right
+        weight: 1
+      - path: Global/Controls_GRP/Control_Leg_Right/JDRV_Foot_02_R
+        weight: 1
+      - path: Global/Controls_GRP/Control_Leg_Right/JDRV_Foot_02_R/JDRV_Foot_01_R
+        weight: 1
+      - path: Global/Controls_GRP/Control_Leg_Right/JDRV_Foot_02_R/JDRV_Foot_01_R/JDRV_Ankle_01_R
+        weight: 1
+      - path: Global/Controls_GRP/Control_PoleVect_Arm_L
+        weight: 1
+      - path: Global/Controls_GRP/Control_PoleVect_Arm_R
+        weight: 1
+      - path: Global/Controls_GRP/Control_PoleVect_Leg_L
+        weight: 1
+      - path: Global/Controls_GRP/Control_PoleVect_Leg_R
+        weight: 1
+      - path: Global/Controls_GRP/curve_ponytailBase
+        weight: 1
+      - path: Global/Controls_GRP/PonyTail_Curve
+        weight: 1
+      - path: Global/Controls_GRP/Spine_Curve
+        weight: 1
+      - path: Global/IKgroup
+        weight: 1
+      - path: Global/IKgroup/PonyTail_ikHandle
+        weight: 1
+      - path: Global/IKgroup/rp_Arm_L
+        weight: 1
+      - path: Global/IKgroup/rp_Arm_R
+        weight: 1
+      - path: Global/IKgroup/rp_Leg_L
+        weight: 1
+      - path: Global/IKgroup/rp_Leg_R
+        weight: 1
+      - path: Global/IKgroup/Spine_ikHandle
+        weight: 1
+      - path: Global/Skeleton_GRP
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_pelvis_01
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_pelvis_01/be_pelvis_01
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_pelvis_01/bind_Hip_L
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_pelvis_01/bind_Hip_L/bind_Knee_L
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_pelvis_01/bind_Hip_L/bind_Knee_L/be_Ankle_L
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_pelvis_01/bind_Hip_L/bind_Knee_L/be_Ankle_L/bind_Ankle_02_L
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_pelvis_01/bind_Hip_L/bind_Knee_L/be_Ankle_L/bind_Ankle_02_L/bind_Foot_01_L
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_pelvis_01/bind_Hip_L/bind_Knee_L/be_Ankle_L/bind_Ankle_02_L/bind_Foot_01_L/bind_Foot_02_L
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_pelvis_01/bind_Hip_R
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_pelvis_01/bind_Hip_R/bind_Knee_R
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_pelvis_01/bind_Hip_R/bind_Knee_R/be_Ankle_R
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_pelvis_01/bind_Hip_R/bind_Knee_R/be_Ankle_R/bind_Ankle_02_R
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_pelvis_01/bind_Hip_R/bind_Knee_R/be_Ankle_R/bind_Ankle_02_R/bind_Foot_01_R
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_pelvis_01/bind_Hip_R/bind_Knee_R/be_Ankle_R/bind_Ankle_02_R/bind_Foot_01_R/bind_Foot_02_R
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_L
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_L/bind_Forearm_L
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_L/bind_Forearm_L/be_Wrist_L
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_L/bind_Forearm_L/be_Wrist_L/bind_Hand_L_01
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_L/bind_Forearm_L/be_Wrist_L/bind_Hand_L_01/be_Hand_L_02
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_L/bind_Forearm_L/be_Wrist_L/bind_Hand_L_01/be_Hand_L_02/bind_Fingers_L_01
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_L/bind_Forearm_L/be_Wrist_L/bind_Hand_L_01/be_Hand_L_02/bind_Fingers_L_01/bind_Fingers_L_02
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_L/bind_Forearm_L/be_Wrist_L/bind_Hand_L_01/be_Hand_L_02/bind_Fingers_L_01/bind_Fingers_L_02/be_Fingers_L_03
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_L/bind_Forearm_L/be_Wrist_L/bind_Hand_L_01/bind_Thib_L_01
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_L/bind_Forearm_L/be_Wrist_L/bind_Hand_L_01/bind_Thib_L_01/bind_Thib_L_02
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_L/bind_Forearm_L/be_Wrist_L/bind_Hand_L_01/bind_Thib_L_01/bind_Thib_L_02/be_Thumb_L_03
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_R
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_R/bind_Forearm_R
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_R/bind_Forearm_R/be_Wrist_R
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_R/bind_Forearm_R/be_Wrist_R/bind_Hand_R_01
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_R/bind_Forearm_R/be_Wrist_R/bind_Hand_R_01/be_Hand_R_02
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_R/bind_Forearm_R/be_Wrist_R/bind_Hand_R_01/be_Hand_R_02/bind_Fingers_R_01
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_R/bind_Forearm_R/be_Wrist_R/bind_Hand_R_01/be_Hand_R_02/bind_Fingers_R_01/bind_Fingers_R_02
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_R/bind_Forearm_R/be_Wrist_R/bind_Hand_R_01/be_Hand_R_02/bind_Fingers_R_01/bind_Fingers_R_02/be_Fingers_R_03
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_R/bind_Forearm_R/be_Wrist_R/bind_Hand_R_01/bind_Thib_R_01
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_R/bind_Forearm_R/be_Wrist_R/bind_Hand_R_01/bind_Thib_R_01/bind_Thib_R_02
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Shoulder_R/bind_Forearm_R/be_Wrist_R/bind_Hand_R_01/bind_Thib_R_01/bind_Thib_R_02/be_Thumb_R_03
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Spine_06
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Spine_06/bind_Neck
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Spine_06/bind_Neck/bind_Head_01
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Spine_06/bind_Neck/bind_Head_01/be_Head_02
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Spine_06/bind_Neck/bind_Head_01/bind_Ponytail_01
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Spine_06/bind_Neck/bind_Head_01/bind_Ponytail_01/bind_Ponytail_02
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Spine_06/bind_Neck/bind_Head_01/bind_Ponytail_01/bind_Ponytail_02/bind_Ponytail_03
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/bind_Spine_06/bind_Neck/bind_Head_01/bind_Ponytail_01/bind_Ponytail_02/bind_Ponytail_03/be_Ponytail_04
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/Control_neck_01
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/Control_neck_01/Control_neck_02
+        weight: 1
+      - path: Global/Skeleton_GRP/bind_Root/bind_Spine_01/bind_Spine_02/bind_Spine_03/bind_Spine_04/bind_Spine_05/Control_neck_01/Control_neck_02/Control_Head
+        weight: 1
+      - path: Mesh_GRP
+        weight: 1
+      - path: Mesh_GRP/Belt
+        weight: 1
+      - path: Mesh_GRP/Body
+        weight: 1
+      - path: Mesh_GRP/Eye_L
+        weight: 1
+      - path: Mesh_GRP/Eye_R
+        weight: 1
+      - path: Mesh_GRP/Hair
+        weight: 1
+      - path: Mesh_GRP/Hat
+        weight: 1
+      - path: Mesh_GRP/Mouth
+        weight: 1
+      - path: Mesh_GRP/Robe
+        weight: 1
+      - path: Mesh_GRP/ShoeLeft
+        weight: 1
+      - path: Mesh_GRP/ShoeRight
+        weight: 1
+      - path: RobeCurveJoints
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group1
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group1/SkirtJoint_01_RingA
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group2
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group2/SkirtJoint_02_RingA
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group3
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group3/SkirtJoint_03_RingA
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group4
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group4/SkirtJoint_04_RingA
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group5
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group5/SkirtJoint_05_RingA
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group6
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group6/SkirtJoint_06_RingA
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group7
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group7/SkirtJoint_07_RingA
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group8
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group8/SkirtJoint_08_RingA
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group9
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group9/SkirtJoint_01_RingB
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group10
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group10/SkirtJoint_02_RingB
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group11
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group11/SkirtJoint_03_RingB
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group12
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group12/SkirtJoint_04_RingB
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group13
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group13/SkirtJoint_05_RingB
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group14
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group14/SkirtJoint_06_RingB
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group15
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group15/SkirtJoint_07_RingB
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group16
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group16/SkirtJoint_08_RingB
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group17
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group17/SkirtJoint_01_RingC
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group18
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group18/SkirtJoint_02_RingC
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group19
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group19/SkirtJoint_03_RingC
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group20
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group20/SkirtJoint_04_RingC
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group21
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group21/SkirtJoint_05_RingC
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group22
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group22/SkirtJoint_06_RingC
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group23
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group23/SkirtJoint_07_RingC
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group24
+        weight: 1
+      - path: RobeCurveJoints/JointRobe_Group24/SkirtJoint_08_RingC
+        weight: 1
+      - path: RobeCurveJoints/SkirtRing_01
+        weight: 1
+      - path: RobeCurveJoints/SkirtRing_02
+        weight: 1
+      - path: RobeCurveJoints/SkirtRing_03
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
