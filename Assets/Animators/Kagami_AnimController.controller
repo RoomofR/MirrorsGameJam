@@ -255,7 +255,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Jump
-  m_Speed: 4
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101226294504580148}
@@ -267,7 +267,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: b874afb4391a25049929cea164f6f5ca, type: 2}
+  m_Motion: {fileID: 7400000, guid: a57f50ab9cdf8db4b88c10a6d9dc06cb, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

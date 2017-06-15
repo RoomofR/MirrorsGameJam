@@ -12,6 +12,7 @@ public struct pos2D{
 
     // Used to send requests to the Animator to play animations
 public enum EAnimations {Idle, Jump, TurnLeft, TurnRight }
+public enum EFaceDirection { North, East, South, West }
 
 public class PlayerMovementController : MonoBehaviour {
 
@@ -28,14 +29,17 @@ public class PlayerMovementController : MonoBehaviour {
 	private bool sideShake;
 
 	//CONSTANTS
-	private float playerYOffset=0.05f;
+	private float playerYOffset=0.02f;
 	private float raycasYOffset=0.1f;
 
 	[HideInInspector]
 	public pos2D[] orientation = new pos2D[4] {new pos2D(-1,0),new pos2D(1,0),new pos2D(0,-1),new pos2D(0,1)};
 
-    private Animator characterAnimator;
+
+    [Header("Animation Options")]
     public AnimationCurve jumpCurve;
+    private Animator characterAnimator;
+    private float playerYOffsetJump = 0.0f;
 
 
 
@@ -88,7 +92,7 @@ public class PlayerMovementController : MonoBehaviour {
 		Vector3 anchorPos = getTilePos(playerPos.x,playerPos.y,playerYOffset);
 		float posX = Mathf.SmoothDamp(Player.position.x, anchorPos.x, ref velocity.x, smoothTimeX);
 		float posZ = Mathf.SmoothDamp(Player.position.z, anchorPos.z, ref velocity.y, smoothTimeZ);
-		Player.position = new Vector3(posX,playerYOffset,posZ);
+		Player.position = new Vector3(posX,playerYOffset + playerYOffsetJump, posZ);
 	}
 
 	//Set Player Location
@@ -119,6 +123,7 @@ public class PlayerMovementController : MonoBehaviour {
             }
             else { playerPos = tempPos; }
             PlayAnimation(EAnimations.Jump);
+            StartCoroutine(JumpHeight());
         }
         else shake(move.x==0);
 	}
@@ -172,14 +177,18 @@ public class PlayerMovementController : MonoBehaviour {
 	}
 
     IEnumerator JumpHeight() {
-        Vector3 init_position = this.transform.position;
+        //Vector3 init_position = this.transform.position;
+        float init_yPos = playerYOffset;
+
         float running_time = 0;
         float end_time = jumpCurve.keys[jumpCurve.length - 1].time;
         while (running_time < end_time) {
             running_time += Time.deltaTime;
-            Vector3 position = this.transform.position;
-            position.y = init_position.y + jumpCurve.Evaluate(running_time);
-            this.transform.position = position;
+            //float yPos = Player.position.y;
+            //yPos = init_yPos + jumpCurve.Evaluate(running_time);
+            //this.transform.position = position;
+            playerYOffsetJump = init_yPos + jumpCurve.Evaluate(running_time);
+
             yield return new WaitForEndOfFrame();
         }
     }
