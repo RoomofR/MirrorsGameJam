@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public struct pos2D{
 	public pos2D(int a,int b) {
@@ -33,10 +35,11 @@ public class PlayerMovementController : MonoBehaviour {
 	public pos2D[] orientation = new pos2D[4] {new pos2D(-1,0),new pos2D(1,0),new pos2D(0,-1),new pos2D(0,1)};
 
     private Animator characterAnimator;
+    public AnimationCurve jumpCurve;
 
-    // public AnimationCurve jumpCurve; // <===== if I fail to fix the current issue with the Jump animation's Y axis, then we can use this to control height over the duration of the jump
 
-	void Awake () {
+
+    void Awake () {
 		floorSpots=mapFloor();
 		setPlayer(playerPos.x,playerPos.y);
 	}
@@ -168,8 +171,21 @@ public class PlayerMovementController : MonoBehaviour {
 		else return Vector3.zero;
 	}
 
+    IEnumerator JumpHeight() {
+        Vector3 init_position = this.transform.position;
+        float running_time = 0;
+        float end_time = jumpCurve.keys[jumpCurve.length - 1].time;
+        while (running_time < end_time) {
+            running_time += Time.deltaTime;
+            Vector3 position = this.transform.position;
+            position.y = init_position.y + jumpCurve.Evaluate(running_time);
+            this.transform.position = position;
+            yield return new WaitForEndOfFrame();
+        }
+    }
 
-        // Sends a request to the animator to play an animation
+
+    // Sends a request to the animator to play an animation
     public void PlayAnimation(EAnimations animation) {
         if (characterAnimator != null) {
             switch (animation) {
@@ -180,10 +196,10 @@ public class PlayerMovementController : MonoBehaviour {
                     characterAnimator.SetTrigger("tJump");
                     break;
                 case EAnimations.TurnLeft:
-                    //characterAnimator.SetTrigger("tTurnLeft");
+                    characterAnimator.SetTrigger("tTurnLeft");
                     break;
                 case EAnimations.TurnRight:
-                    // characterAnimator.SetTrigger("tTurnRight");
+                    characterAnimator.SetTrigger("tTurnRight");
                     break;
                 default:
                     break;

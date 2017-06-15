@@ -52270,8 +52270,32 @@ MonoBehaviour:
   Player: {fileID: 1089102307}
   shakeTime: 0.1
   shakeStrength: 0.04
-  smoothTimeX: 0.1
-  smoothTimeZ: 0.1
+  jumpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.24896654
+      value: 0.9749956
+      inSlope: 0.07854487
+      outSlope: 0.07854487
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  smoothTimeX: 0.4
+  smoothTimeZ: 0.4
 --- !u!114 &1398376966
 MonoBehaviour:
   m_ObjectHideFlags: 0
