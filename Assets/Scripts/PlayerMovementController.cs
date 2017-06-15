@@ -38,18 +38,31 @@ public class PlayerMovementController : MonoBehaviour {
 
     [Header("Animation Options")]
     public AnimationCurve jumpCurve;
+    public AnimationCurve turnCurve;
+
     private Animator characterAnimator;
+
     private float playerYOffsetJump = 0.0f;
+
+    private EFaceDirection currentFaceDir;
+    private bool bIsTurningLeft = false;
+    private float playerRotYTurn = 0.0f;
 
 
 
     void Awake () {
 		floorSpots=mapFloor();
 		setPlayer(playerPos.x,playerPos.y);
+
+
 	}
 
     void Start() {
         characterAnimator = Player.GetChild(0).GetComponent<Animator>();
+
+
+        Player.eulerAngles = new Vector3(0, 0, 0); // TEMP - could initial start rot be decided by the level?
+        currentFaceDir = EFaceDirection.East; // TEMP
     }
 
 	void Update(){
@@ -58,6 +71,15 @@ public class PlayerMovementController : MonoBehaviour {
         // Turn Left/Right animation could be played, then, if KeyDown is still true, move teh character and play the jump anim
 
 		//Controls
+        if (Input.GetKeyDown(KeyCode.P)) {
+            bIsTurningLeft = true;
+            StartCoroutine(HandleTurnRotation());
+            PlayAnimation(EAnimations.TurnLeft);
+            Debug.Log("TurnLeft");
+           
+        }
+
+
 		if(Input.GetKeyDown(KeyCode.A)){
 			movePlayer(orientation[0]);
 		}
@@ -93,6 +115,10 @@ public class PlayerMovementController : MonoBehaviour {
 		float posX = Mathf.SmoothDamp(Player.position.x, anchorPos.x, ref velocity.x, smoothTimeX);
 		float posZ = Mathf.SmoothDamp(Player.position.z, anchorPos.z, ref velocity.y, smoothTimeZ);
 		Player.position = new Vector3(posX,playerYOffset + playerYOffsetJump, posZ);
+
+
+        
+        Player.eulerAngles = new Vector3(0, playerRotYTurn, 0); 
 	}
 
 	//Set Player Location
@@ -123,7 +149,7 @@ public class PlayerMovementController : MonoBehaviour {
             }
             else { playerPos = tempPos; }
             PlayAnimation(EAnimations.Jump);
-            StartCoroutine(JumpHeight());
+            StartCoroutine(HandleJumpHeight());
         }
         else shake(move.x==0);
 	}
@@ -176,9 +202,9 @@ public class PlayerMovementController : MonoBehaviour {
 		else return Vector3.zero;
 	}
 
-    IEnumerator JumpHeight() {
+    IEnumerator HandleJumpHeight() {
         //Vector3 init_position = this.transform.position;
-        float init_yPos = playerYOffset;
+        float initYPos = playerYOffset;
 
         float running_time = 0;
         float end_time = jumpCurve.keys[jumpCurve.length - 1].time;
@@ -187,9 +213,27 @@ public class PlayerMovementController : MonoBehaviour {
             //float yPos = Player.position.y;
             //yPos = init_yPos + jumpCurve.Evaluate(running_time);
             //this.transform.position = position;
-            playerYOffsetJump = init_yPos + jumpCurve.Evaluate(running_time);
+            playerYOffsetJump = initYPos + jumpCurve.Evaluate(running_time);
 
             yield return new WaitForEndOfFrame();
+        }
+    }
+
+    IEnumerator HandleTurnRotation() {
+        //Vector3 init_position = this.transform.position;
+        float initYRot = Player.eulerAngles.y;
+
+        float running_time = 0;
+        float end_time = jumpCurve.keys[jumpCurve.length - 1].time;
+        while (running_time < end_time) {
+            running_time += Time.deltaTime;
+            //float yPos = Player.position.y;
+            //yPos = init_yPos + jumpCurve.Evaluate(running_time);
+            //this.transform.position = position;
+            if (bIsTurningLeft) playerRotYTurn = initYRot + turnCurve.Evaluate(running_time) * -1;
+
+            else  playerRotYTurn = initYRot + turnCurve.Evaluate(running_time);
+                yield return new WaitForEndOfFrame();
         }
     }
 
