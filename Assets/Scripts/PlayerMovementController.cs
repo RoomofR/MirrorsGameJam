@@ -12,6 +12,7 @@ public struct pos2D{
 
     // Used to send requests to the Animator to play animations
 public enum EAnimations {Idle, Jump, TurnLeft, TurnRight }
+    // Used to handle turning and face direction of the character
 public enum EFaceDirection { North, East, South, West }
 
 public class PlayerMovementController : MonoBehaviour {
@@ -33,7 +34,9 @@ public class PlayerMovementController : MonoBehaviour {
 	private float raycasYOffset=0.1f;
 
 	[HideInInspector]
-	public pos2D[] orientation = new pos2D[4] {new pos2D(-1,0),new pos2D(1,0),new pos2D(0,-1),new pos2D(0,1)};
+	//public pos2D[] orientation = new pos2D[4] {new pos2D(-1,0),new pos2D(1,0),new pos2D(0,-1),new pos2D(0,1)}; <==== I reordered your array to match my enum.
+
+    public pos2D[] orientation = new pos2D[4] { new pos2D(0, -1), new pos2D(1, 0), new pos2D(0, 1), new pos2D(-1, 0) };
 
 
     [Header("Animation Options")]
@@ -47,6 +50,8 @@ public class PlayerMovementController : MonoBehaviour {
     private EFaceDirection currentFaceDir;
     private bool bIsTurningLeft = false;
     private float playerRotYTurn = 0.0f;
+
+    private bool bInputDisabled = false;
 
 
 
@@ -67,33 +72,9 @@ public class PlayerMovementController : MonoBehaviour {
 
 	void Update(){
 
-        // Do we need to ROTATE the character first?
-        // Turn Left/Right animation could be played, then, if KeyDown is still true, move teh character and play the jump anim
+        PlayerInput();
 
-		//Controls
-        if (Input.GetKeyDown(KeyCode.P)) {
-            bIsTurningLeft = true;
-            StartCoroutine(HandleTurnRotation());
-            PlayAnimation(EAnimations.TurnLeft);
-            Debug.Log("TurnLeft");
-           
-        }
-
-
-		if(Input.GetKeyDown(KeyCode.A)){
-			movePlayer(orientation[0]);
-		}
-		if(Input.GetKeyDown(KeyCode.D)){
-			movePlayer(orientation[1]);
-		}
-		if(Input.GetKeyDown(KeyCode.W)){
-			movePlayer(orientation[2]);
-		}
-		if(Input.GetKeyDown(KeyCode.S)){
-			movePlayer(orientation[3]);
-		}
-
-		if(shakeTimer>=0){
+        if (shakeTimer>=0){
 			Vector2 shakePos = Random.insideUnitCircle * shakeStrength;//+shakePos.x
 			Vector3 shakePlayerPos = Player.position;
 			if(!sideShake)shakePlayerPos.z+=shakePos.y;
@@ -102,6 +83,127 @@ public class PlayerMovementController : MonoBehaviour {
 			shakeTimer-=Time.deltaTime;
 		}
 	}
+
+    private void PlayerInput() {
+        if (!bInputDisabled) {
+            
+            #region MoveNorth
+            if (Input.GetKey(KeyCode.W)) {
+                switch (currentFaceDir) {
+                    case EFaceDirection.North:
+                        movePlayer(orientation[(int)EFaceDirection.North]);
+                        break;
+                    case EFaceDirection.East:
+                        bIsTurningLeft = true;
+                        StartCoroutine(HandleTurnRotation());
+                        currentFaceDir = EFaceDirection.North;
+                        break;
+                    case EFaceDirection.South:
+                        bIsTurningLeft = false;
+                        StartCoroutine(HandleTurnRotation());
+                        currentFaceDir = EFaceDirection.West;
+                        break;
+                    case EFaceDirection.West:
+                        bIsTurningLeft = false;
+                        StartCoroutine(HandleTurnRotation());
+                        currentFaceDir = EFaceDirection.North;
+                        break;
+                }
+            }
+            #endregion
+
+            #region MoveEast
+            if (Input.GetKey(KeyCode.D)) {
+                switch (currentFaceDir) {
+                    case EFaceDirection.North:
+                        bIsTurningLeft = false;
+                        StartCoroutine(HandleTurnRotation());
+                        currentFaceDir = EFaceDirection.East;
+                        break;
+                    case EFaceDirection.East:
+                        movePlayer(orientation[(int)EFaceDirection.East]);
+                        break;
+                    case EFaceDirection.South:
+                        bIsTurningLeft = true;
+                        StartCoroutine(HandleTurnRotation());
+                        currentFaceDir = EFaceDirection.East;
+                        break;
+                    case EFaceDirection.West:
+                        bIsTurningLeft = true;
+                        StartCoroutine(HandleTurnRotation());
+                        currentFaceDir = EFaceDirection.South;
+                        break;
+                }
+            }
+            #endregion
+
+            #region MoveSouth
+            if (Input.GetKey(KeyCode.S)) {
+                switch (currentFaceDir) {
+                    case EFaceDirection.North:
+                        bIsTurningLeft = true;
+                        StartCoroutine(HandleTurnRotation());
+                        currentFaceDir = EFaceDirection.West;
+                        break;
+                    case EFaceDirection.East:
+                        bIsTurningLeft = false;
+                        StartCoroutine(HandleTurnRotation());
+                        currentFaceDir = EFaceDirection.South;
+                        break;
+                    case EFaceDirection.South:
+                        movePlayer(orientation[(int)EFaceDirection.South]);
+                        break;
+                    case EFaceDirection.West:
+                        bIsTurningLeft = true;
+                        StartCoroutine(HandleTurnRotation());
+                        currentFaceDir = EFaceDirection.South;
+                        break;
+                }
+            }
+            #endregion
+
+            #region MoveWest
+            if (Input.GetKey(KeyCode.A)) {
+                switch (currentFaceDir) {
+                    case EFaceDirection.North:
+                        bIsTurningLeft = true;
+                        StartCoroutine(HandleTurnRotation());
+                        currentFaceDir = EFaceDirection.West;
+                        break;
+                    case EFaceDirection.East:
+                        bIsTurningLeft = true;
+                        StartCoroutine(HandleTurnRotation());
+                        currentFaceDir = EFaceDirection.North;
+                        break;
+                    case EFaceDirection.South:
+                        bIsTurningLeft = false;
+                        StartCoroutine(HandleTurnRotation());
+                        currentFaceDir = EFaceDirection.West;
+                        break;
+                    case EFaceDirection.West:
+                        movePlayer(orientation[(int)EFaceDirection.West]);
+                        break;
+                }
+            }
+            #endregion
+
+            /*
+            if (Input.GetKeyDown(KeyCode.A)) {
+                movePlayer(orientation[(int)EFaceDirection.North]);
+            }
+            if (Input.GetKeyDown(KeyCode.D)) {
+                movePlayer(orientation[(int)EFaceDirection.East]);
+            }
+            if (Input.GetKeyDown(KeyCode.W)) {
+                movePlayer(orientation[(int)EFaceDirection.South]);
+            }
+            if (Input.GetKeyDown(KeyCode.S)) {
+                movePlayer(orientation[(int)EFaceDirection.West]);
+            }
+            */
+
+        }
+    }
 
 	//Shake
 	Vector2 velocity;
@@ -115,8 +217,6 @@ public class PlayerMovementController : MonoBehaviour {
 		float posX = Mathf.SmoothDamp(Player.position.x, anchorPos.x, ref velocity.x, smoothTimeX);
 		float posZ = Mathf.SmoothDamp(Player.position.z, anchorPos.z, ref velocity.y, smoothTimeZ);
 		Player.position = new Vector3(posX,playerYOffset + playerYOffsetJump, posZ);
-
-
         
         Player.eulerAngles = new Vector3(0, playerRotYTurn, 0); 
 	}
@@ -203,6 +303,7 @@ public class PlayerMovementController : MonoBehaviour {
 	}
 
     IEnumerator HandleJumpHeight() {
+        bInputDisabled = true;
         //Vector3 init_position = this.transform.position;
         float initYPos = playerYOffset;
 
@@ -217,9 +318,12 @@ public class PlayerMovementController : MonoBehaviour {
 
             yield return new WaitForEndOfFrame();
         }
+        yield return new WaitForSeconds(0.1f);
+        bInputDisabled = false;
     }
 
     IEnumerator HandleTurnRotation() {
+        bInputDisabled = true;
         //Vector3 init_position = this.transform.position;
         float initYRot = Player.eulerAngles.y;
 
@@ -227,14 +331,14 @@ public class PlayerMovementController : MonoBehaviour {
         float end_time = jumpCurve.keys[jumpCurve.length - 1].time;
         while (running_time < end_time) {
             running_time += Time.deltaTime;
-            //float yPos = Player.position.y;
-            //yPos = init_yPos + jumpCurve.Evaluate(running_time);
-            //this.transform.position = position;
+
             if (bIsTurningLeft) playerRotYTurn = initYRot + turnCurve.Evaluate(running_time) * -1;
 
-            else  playerRotYTurn = initYRot + turnCurve.Evaluate(running_time);
+            else playerRotYTurn = initYRot + turnCurve.Evaluate(running_time);
+            
                 yield return new WaitForEndOfFrame();
         }
+        bInputDisabled = false;
     }
 
 
