@@ -2,14 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct pos2D{
-	public pos2D(int a,int b) {
-    x = a; y = b;
-  	}
-	public int x;
-	public int y;
-}
-
+public struct pos2D{public pos2D(int a,int b) { x = a; y = b;}public int x;public int y;}
     // Used to send requests to the Animator to play animations
 public enum EAnimations {Idle, Jump, TurnLeft, TurnRight }
     // Used to handle turning and face direction of the character

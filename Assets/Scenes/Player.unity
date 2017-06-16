@@ -32403,7 +32403,7 @@ Skybox:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 802280757}
   m_Enabled: 1
-  m_CustomSkybox: {fileID: 2100000, guid: 96c3e3acf38ac55498ca2c29910c9095, type: 2}
+  m_CustomSkybox: {fileID: 2100000, guid: 88ec9a13802800449aaf825aff3aadc7, type: 2}
 --- !u!1 &803134425
 GameObject:
   m_ObjectHideFlags: 0
@@ -55459,6 +55459,18 @@ MonoBehaviour:
   Player: {fileID: 1738775631}
   shakeTime: 0.1
   shakeStrength: 0.04
+  jumpCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  turnCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   smoothTimeX: 0.1
   smoothTimeZ: 0.1
 --- !u!4 &1441737141
