@@ -27,8 +27,6 @@ public class PlayerMovementController : MonoBehaviour {
 	private float raycasYOffset=0.1f;
 
 	[HideInInspector]
-	//public pos2D[] orientation = new pos2D[4] {new pos2D(-1,0),new pos2D(1,0),new pos2D(0,-1),new pos2D(0,1)}; <==== I reordered your array to match my enum.
-
     public pos2D[] orientation = new pos2D[4] { new pos2D(0, -1), new pos2D(1, 0), new pos2D(0, 1), new pos2D(-1, 0) };
 
 
@@ -51,13 +49,10 @@ public class PlayerMovementController : MonoBehaviour {
     void Awake () {
 		floorSpots=mapFloor();
 		setPlayer(playerPos.x,playerPos.y);
-
-
 	}
 
     void Start() {
         characterAnimator = Player.GetChild(0).GetComponent<Animator>();
-
 
         Player.eulerAngles = new Vector3(0, 0, 0); // TEMP - could initial start rot be decided by the level?
         currentFaceDir = EFaceDirection.East; // TEMP
@@ -68,7 +63,7 @@ public class PlayerMovementController : MonoBehaviour {
         PlayerInput();
 
         if (shakeTimer>=0){
-			Vector2 shakePos = Random.insideUnitCircle * shakeStrength;//+shakePos.x
+			Vector2 shakePos = Random.insideUnitCircle * shakeStrength;
 			Vector3 shakePlayerPos = Player.position;
 			if(!sideShake)shakePlayerPos.z+=shakePos.y;
 			else shakePlayerPos.x+=shakePos.x;
