@@ -490,6 +490,8 @@ MonoBehaviour:
   - {fileID: 1630613223}
   - {fileID: 1169542758}
   - {fileID: 782270444}
+  shakeTime: 0.1
+  shakeStrength: 0.03
 --- !u!114 &745181422
 MonoBehaviour:
   m_ObjectHideFlags: 0
