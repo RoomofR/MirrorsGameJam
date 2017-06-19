@@ -1591,7 +1591,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: f73fb000028d0c345bddc05134dc5b77, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.029668946
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f73fb000028d0c345bddc05134dc5b77, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1623,7 +1623,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f73fb000028d0c345bddc05134dc5b77, type: 3}
       propertyPath: m_LocalScale.x
-      value: 50
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f73fb000028d0c345bddc05134dc5b77, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1633,6 +1633,10 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: f73fb000028d0c345bddc05134dc5b77, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 49e3faf21ae1e4349b826a83ea49c76f, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f73fb000028d0c345bddc05134dc5b77, type: 3}
   m_IsPrefabParent: 0
