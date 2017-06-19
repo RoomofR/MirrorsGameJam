@@ -2,7 +2,7 @@
 
 public class FadingEffect : MonoBehaviour {
 
-	publuc Texture2D fadeOutTexture;
+	public Texture2D fadeOutTexture;
 	public float fadeSpeed = 0.8f;
 
 	private int drawDepth = -1000;
