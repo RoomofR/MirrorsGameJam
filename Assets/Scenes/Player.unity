@@ -4011,52 +4011,6 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
---- !u!1001 &614724602
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4605229169239732, guid: c62f39bc72156c244a96a7edc600390b, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4605229169239732, guid: c62f39bc72156c244a96a7edc600390b, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4605229169239732, guid: c62f39bc72156c244a96a7edc600390b, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4605229169239732, guid: c62f39bc72156c244a96a7edc600390b, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4605229169239732, guid: c62f39bc72156c244a96a7edc600390b, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4605229169239732, guid: c62f39bc72156c244a96a7edc600390b, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4605229169239732, guid: c62f39bc72156c244a96a7edc600390b, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4605229169239732, guid: c62f39bc72156c244a96a7edc600390b, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1968212084413006, guid: c62f39bc72156c244a96a7edc600390b, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: c62f39bc72156c244a96a7edc600390b, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &634935245
 GameObject:
   m_ObjectHideFlags: 0
@@ -5353,6 +5307,7 @@ MonoBehaviour:
   Mirrors: {fileID: 470101467}
   Player: {fileID: 1738775631}
   MirrorTime: 0.07
+  follow: 1
 --- !u!114 &1953271733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5365,6 +5320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelID: 0
+  DebugLevel: 0
 --- !u!114 &1953271734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5389,6 +5345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraAnchor: {fileID: 872510112}
   rotationSpeed: 4
+  rotate: 1
 --- !u!114 &1953271736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5403,6 +5360,9 @@ MonoBehaviour:
   FloorSpots: {fileID: 0}
   Player: {fileID: 1738775631}
   playerPos:
+    x: 0
+    y: 0
+  EndPos:
     x: 0
     y: 0
   shakeTime: 0.1

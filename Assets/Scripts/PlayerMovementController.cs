@@ -54,7 +54,7 @@ public class PlayerMovementController : MonoBehaviour {
     	FloorSpots=board;
     	floorSpots=mapFloor();
     	playerPos=startPos;
-    	setPlayer(playerPos.x,playerPos.y);
+    	setPlayerPos(playerPos.x,playerPos.y);
     	EndPos=endPos;
     	return getTilePos(endPos.x,endPos.y,0.164f);
     }
@@ -225,12 +225,14 @@ public class PlayerMovementController : MonoBehaviour {
 	}
 
 	//Set Player Location
-	public void setPlayer(int x, int y){
+	public void setPlayerPos(int x, int y){
 		if(floorSpots.GetLength(0)>y && y>=0 && floorSpots.GetLength(1)>x && x>=0){
 			playerPos.x=x;
 			playerPos.y=y;
 		}
 	}
+
+	public Vector3 getPlayerPos(){return Player.position;}
 
 	//Moves...
 	private void movePlayer(pos2D move){

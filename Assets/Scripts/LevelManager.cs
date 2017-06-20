@@ -5,18 +5,22 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour {
 
 	public int LevelID;
-
+	public bool DebugLevel;
 	private GameObject Level;
 	private GameObject EndPortal;
 	private PlayerMovementController Player;
+	private CameraMovementController Cam;
+	private MirrorFollow Mirror;
 
 
 	void Awake(){
 		//EndPortal Resource
 		EndPortal=Resources.Load("Objects/EndPortalEffect") as GameObject;
 		//Init First Level
-		LevelID=PlayerPrefs.GetInt("currentLevelID");
+		if(!DebugLevel){LevelID=PlayerPrefs.GetInt("currentLevelID");}
 		Player = GetComponent<PlayerMovementController>();
+		Cam = GetComponent<CameraMovementController>();
+		Mirror = GetComponent<MirrorFollow>();
 		InitLevel(LevelID);
 	}
 
@@ -34,6 +38,9 @@ public class LevelManager : MonoBehaviour {
 		GameObject endPortal = Instantiate(EndPortal);
 		endPortal.transform.position = Player.SetBoard(LevelData.board, LevelData.StartPos, LevelData.EndPos);
 		endPortal.transform.parent = Level.transform;
+		//Other Settings
+		Mirror.follow=true;
+		Cam.rotate=LevelData.CameraRotate;
 	}
 
 	IEnumerator leaveToMainMenu(){
