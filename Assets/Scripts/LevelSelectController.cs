@@ -1,17 +1,26 @@
 ﻿using UnityEngine;
-
+using System.Collections;
+using UnityEngine.SceneManagement;
 public class LevelSelectController : MonoBehaviour {
 	
 	public int level;
 	public Transform PlayerSelector;
+	public Transform LevelBarrier;
 	public Transform[] levelSpots;
 	[Header("Shake Options")]
 	public float shakeTime;
 	public float shakeStrength;
 
 	private Vector3 targetPosition;
-
-	void Start(){targetPosition=levelSpots[0].position;}
+	private int solvedLevel = 0;
+	void Start(){
+		targetPosition=levelSpots[0].position;
+		//Get Levels Solved From PlayerPrefs
+		solvedLevel=PlayerPrefs.GetInt("solvedLevel");
+		//Set Level Barrier Location
+		if(levelSpots.Length > solvedLevel+1){LevelBarrier.position = new Vector3(levelSpots[solvedLevel+1].position.x+1,LevelBarrier.position.y,LevelBarrier.position.z);
+		}else {LevelBarrier.Translate(0,100,0);}
+	}	
 
 	void Update () {
             if (Input.GetKeyDown(KeyCode.A)) { //Move Left
@@ -23,7 +32,7 @@ public class LevelSelectController : MonoBehaviour {
                 }
             }
             if (Input.GetKeyDown(KeyCode.D)) { //Move Right
-                if(levelSpots.Length-1>level){
+                if(levelSpots.Length-1>level && level-1<solvedLevel){
                 	level++;
                 	targetPosition=levelSpots[level].position;
                 }else{
@@ -33,7 +42,7 @@ public class LevelSelectController : MonoBehaviour {
 
             //Select
             if((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))){
-            	if(level!=0){levelSelect(level);}
+            	if(level!=0){StartCoroutine("levelSelect");}
             	else {shake();}
             }
 
@@ -47,8 +56,12 @@ public class LevelSelectController : MonoBehaviour {
 			}
 	}
 
-	public void levelSelect(int levelID){
-		Debug.Log(levelID);
+	IEnumerator levelSelect(){
+		Debug.Log(level);
+		PlayerPrefs.SetInt("currentLevelID", level);
+		float fadeSpeed = GetComponent<FadingEffect>().BeginFade(1);
+		yield return new WaitForSeconds(fadeSpeed);
+		SceneManager.LoadScene("Player", LoadSceneMode.Single);
 	}
 
 	Vector2 velocity;
