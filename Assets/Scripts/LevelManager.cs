@@ -43,7 +43,6 @@ public class LevelManager : MonoBehaviour {
 		Cam.rotate=LevelData.CameraRotate;
 	}
 
-
 	IEnumerator leaveToMainMenu(){
 		float fadeSpeed = GetComponent<FadingEffect>().BeginFade(1);
 		yield return new WaitForSeconds(fadeSpeed);
