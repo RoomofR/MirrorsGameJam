@@ -11,7 +11,7 @@ public class FadingEffect : MonoBehaviour {
 	private int fadeDir = -1;
 
 	void OnGUI(){
-		alpha += fadeDir * fadeSpeed + Time.deltaTime;
+		alpha += fadeDir * fadeSpeed * Time.deltaTime;
 		alpha = Mathf.Clamp01(alpha);
 		GUI.color = new Color (GUI.color.r,GUI.color.g,GUI.color.b,alpha);
 		GUI.depth = drawDepth;
@@ -23,7 +23,7 @@ public class FadingEffect : MonoBehaviour {
 		return fadeSpeed;
 	}
 
-	void onLevelWasLoaded(){
+	void OnLevelWasLoaded(){
 		BeginFade(-1);
 	}
 }
