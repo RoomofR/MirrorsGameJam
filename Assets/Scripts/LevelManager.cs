@@ -3,7 +3,21 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
 
-	public int LevelLoaded;
+	public int LevelID;
+	private GameObject Level;
+
+	void Awake(){
+		LevelID=PlayerPrefs.GetInt("currentLevelID");
+		Debug.Log("Levels/Level"+LevelID);
+		Level = Instantiate(Resources.Load("Levels/Level"+LevelID) as GameObject);
+		Level LevelData=Level.GetComponent<Level>();
+		PlayerMovementController Player = GetComponent<PlayerMovementController>();
+
+		Player.FloorSpots=LevelData.board;
+		Player.mapFloor();
+		
+		Player.setPlayer(LevelData.StartPos.x,LevelData.StartPos.y);
+	}
 
 
 	void OnEnable(){

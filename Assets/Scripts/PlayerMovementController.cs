@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public struct pos2D{public pos2D(int a,int b) { x = a; y = b;}public int x;public int y;}
     // Used to send requests to the Animator to play animations
 public enum EAnimations {Idle, Jump, TurnLeft, TurnRight }
@@ -47,8 +48,8 @@ public class PlayerMovementController : MonoBehaviour {
 
 
     void Awake () {
-		floorSpots=mapFloor();
-		setPlayer(playerPos.x,playerPos.y);
+		//floorSpots=mapFloor();
+		//setPlayer(playerPos.x,playerPos.y);
 	}
 
     void Start() {
@@ -201,16 +202,18 @@ public class PlayerMovementController : MonoBehaviour {
 
 	void FixedUpdate(){
 		//Player
-		Vector3 anchorPos = getTilePos(playerPos.x,playerPos.y,playerYOffset);
-		float posX = Mathf.SmoothDamp(Player.position.x, anchorPos.x, ref velocity.x, smoothTimeX);
-		float posZ = Mathf.SmoothDamp(Player.position.z, anchorPos.z, ref velocity.y, smoothTimeZ);
-		Player.position = new Vector3(posX,playerYOffset + playerYOffsetJump, posZ);
-        
-        Player.eulerAngles = new Vector3(0, playerRotYTurn, 0); 
+		if(floorSpots!=null){
+			Vector3 anchorPos = getTilePos(playerPos.x,playerPos.y,playerYOffset);
+			float posX = Mathf.SmoothDamp(Player.position.x, anchorPos.x, ref velocity.x, smoothTimeX);
+			float posZ = Mathf.SmoothDamp(Player.position.z, anchorPos.z, ref velocity.y, smoothTimeZ);
+			Player.position = new Vector3(posX,playerYOffset + playerYOffsetJump, posZ);
+	        
+	        Player.eulerAngles = new Vector3(0, playerRotYTurn, 0); 
+		}
 	}
 
 	//Set Player Location
-	private void setPlayer(int x, int y){
+	public void setPlayer(int x, int y){
 		if(floorSpots.GetLength(0)>y && y>=0 && floorSpots.GetLength(1)>x && x>=0){
 			playerPos.x=x;
 			playerPos.y=y;
@@ -250,7 +253,7 @@ public class PlayerMovementController : MonoBehaviour {
 	}
 
 	//Create Floor Map Based on FloorSpots Object
-	private Transform[,] mapFloor(){
+	public Transform[,] mapFloor(){
 		//Rows
 		Transform[] rows = new Transform[FloorSpots.childCount];
 		int rx=0;foreach(Transform row in FloorSpots){rows[rx]=row;rx++;}
