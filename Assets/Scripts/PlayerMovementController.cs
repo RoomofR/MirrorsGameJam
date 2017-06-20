@@ -44,7 +44,7 @@ public class PlayerMovementController : MonoBehaviour {
 
     private float playerYOffsetJump = 0.0f;
 
-    private EFaceDirection currentFaceDir;
+    public EFaceDirection currentFaceDir;
     private bool bIsTurningLeft = false;
     private float playerRotYTurn = 0.0f;
 
@@ -232,8 +232,6 @@ public class PlayerMovementController : MonoBehaviour {
 		}
 	}
 
-	public Vector3 getPlayerPos(){return Player.position;}
-
 	//Moves...
 	private void movePlayer(pos2D move){
 		pos2D tempPos = playerPos;
@@ -248,7 +246,7 @@ public class PlayerMovementController : MonoBehaviour {
             Vector3 orig = new Vector3(Player.position.x, raycasYOffset, Player.position.z);
             Vector3 directionRay = getTilePos(tempPos.x, tempPos.y, raycasYOffset) - orig;
             RaycastHit hit;
-            if (Physics.Raycast(orig, directionRay, out hit, 1) &&
+            if (Physics.Raycast(orig, directionRay, out hit, 0.5f) &&
                 hit.collider.GetComponent<Blockade>() != null) {
                 shake(move.x == 0);
             }

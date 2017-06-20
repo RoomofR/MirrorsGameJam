@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.16488081, g: 0.10872071, b: 0.2239596, a: 1}
+  m_IndirectSpecularColor: {r: 0.16487625, g: 0.10864479, b: 0.22398311, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -18034,56 +18034,40 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 400000, guid: b0e174c4f541a9343b23fd41fed8c4ea, type: 3}
+    - target: {fileID: 4897220637267924, guid: 537ad8ad49f8e0c4c82bd6bd5539fc27, type: 2}
       propertyPath: m_LocalPosition.x
       value: 1.024
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: b0e174c4f541a9343b23fd41fed8c4ea, type: 3}
+    - target: {fileID: 4897220637267924, guid: 537ad8ad49f8e0c4c82bd6bd5539fc27, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0.219
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: b0e174c4f541a9343b23fd41fed8c4ea, type: 3}
+    - target: {fileID: 4897220637267924, guid: 537ad8ad49f8e0c4c82bd6bd5539fc27, type: 2}
       propertyPath: m_LocalPosition.z
       value: 2.069
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: b0e174c4f541a9343b23fd41fed8c4ea, type: 3}
+    - target: {fileID: 4897220637267924, guid: 537ad8ad49f8e0c4c82bd6bd5539fc27, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: b0e174c4f541a9343b23fd41fed8c4ea, type: 3}
+    - target: {fileID: 4897220637267924, guid: 537ad8ad49f8e0c4c82bd6bd5539fc27, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0.7071068
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: b0e174c4f541a9343b23fd41fed8c4ea, type: 3}
+    - target: {fileID: 4897220637267924, guid: 537ad8ad49f8e0c4c82bd6bd5539fc27, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: b0e174c4f541a9343b23fd41fed8c4ea, type: 3}
+    - target: {fileID: 4897220637267924, guid: 537ad8ad49f8e0c4c82bd6bd5539fc27, type: 2}
       propertyPath: m_LocalRotation.w
       value: 0.7071068
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: b0e174c4f541a9343b23fd41fed8c4ea, type: 3}
+    - target: {fileID: 4897220637267924, guid: 537ad8ad49f8e0c4c82bd6bd5539fc27, type: 2}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: b0e174c4f541a9343b23fd41fed8c4ea, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: b0e174c4f541a9343b23fd41fed8c4ea, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: b0e174c4f541a9343b23fd41fed8c4ea, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: 67955fc6f849fec4f996d334116c2f11, type: 2}
-    - target: {fileID: 2300000, guid: b0e174c4f541a9343b23fd41fed8c4ea, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: b1eeabbef4aa5874db155367f84f891e, type: 2}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: b0e174c4f541a9343b23fd41fed8c4ea, type: 3}
+  m_ParentPrefab: {fileID: 100100000, guid: 537ad8ad49f8e0c4c82bd6bd5539fc27, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &490946854
 GameObject:
@@ -53582,8 +53566,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FloorSpots: {fileID: 931240430}
   Player: {fileID: 1089102307}
+  playerPos:
+    x: 0
+    y: 0
+  EndPos:
+    x: 0
+    y: 0
   shakeTime: 0.1
   shakeStrength: 0.04
+  orientation:
+  - x: 0
+    y: -1
+  - x: 1
+    y: 0
+  - x: 0
+    y: 1
+  - x: -1
+    y: 0
   jumpCurve:
     serializedVersion: 2
     m_Curve:
@@ -53677,6 +53676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraAnchor: {fileID: 1031690236}
   rotationSpeed: 4
+  rotate: 0
 --- !u!114 &1398376967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53688,7 +53688,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dac60167270090442b7ef49da9e094d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelLoaded: 0
+  LevelID: 0
+  DebugLevel: 0
 --- !u!114 &1398376968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53714,6 +53715,7 @@ MonoBehaviour:
   Mirrors: {fileID: 1632832528}
   Player: {fileID: 1089102307}
   MirrorTime: 0.07
+  follow: 0
 --- !u!1 &1399048810
 GameObject:
   m_ObjectHideFlags: 0
