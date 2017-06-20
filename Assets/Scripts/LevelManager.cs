@@ -4,19 +4,23 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour {
 
 	public int LevelID;
+
 	private GameObject Level;
+	private GameObject EndPortal;
 
 	void Awake(){
+		//EndPortal Resource
+		EndPortal=Resources.Load("Objects/EndPortalEffect") as GameObject;
+		//Init First Level
 		LevelID=PlayerPrefs.GetInt("currentLevelID");
 		Debug.Log("Levels/Level"+LevelID);
 		Level = Instantiate(Resources.Load("Levels/Level"+LevelID) as GameObject);
 		Level LevelData=Level.GetComponent<Level>();
 		PlayerMovementController Player = GetComponent<PlayerMovementController>();
 
-		Player.FloorSpots=LevelData.board;
-		Player.mapFloor();
-		
-		Player.setPlayer(LevelData.StartPos.x,LevelData.StartPos.y);
+		GameObject endPortal = Instantiate(EndPortal);
+		endPortal.transform.position = Player.SetBoard(LevelData.board, LevelData.StartPos, LevelData.EndPos);
+		endPortal.transform.parent = Level.transform;
 	}
 
 

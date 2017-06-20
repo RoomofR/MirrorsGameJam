@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct pos2D{public pos2D(int a,int b) { x = a; y = b;}public int x;public int y;}
+public struct pos2D{
+	public pos2D(int a,int b) { x = a; y = b;}public int x;public int y;
+	public static bool operator ==(pos2D c1, pos2D c2) {return c1.Equals(c2);}
+	public static bool operator !=(pos2D c1, pos2D c2) {return !c1.Equals(c2);}
+}
     // Used to send requests to the Animator to play animations
 public enum EAnimations {Idle, Jump, TurnLeft, TurnRight }
     // Used to handle turning and face direction of the character
@@ -14,7 +18,8 @@ public class PlayerMovementController : MonoBehaviour {
 	[Header("Transform Objects")]
 	public Transform FloorSpots;
 	public Transform Player;
-	public pos2D playerPos = new pos2D(0,0);
+	public pos2D playerPos;
+	public pos2D EndPos;
 
 	[Header("Shake Options")]
 	public float shakeTime;
@@ -45,7 +50,14 @@ public class PlayerMovementController : MonoBehaviour {
 
     private bool bInputDisabled = false;
 
-
+    public Vector3 SetBoard(Transform board, pos2D startPos, pos2D endPos){
+    	FloorSpots=board;
+    	floorSpots=mapFloor();
+    	playerPos=startPos;
+    	setPlayer(playerPos.x,playerPos.y);
+    	EndPos=endPos;
+    	return getTilePos(endPos.x,endPos.y,0.164f);
+    }
 
     void Awake () {
 		//floorSpots=mapFloor();
@@ -62,6 +74,10 @@ public class PlayerMovementController : MonoBehaviour {
 	void Update(){
 
         PlayerInput();
+
+        if(playerPos==EndPos){
+        	Debug.Log("Level Complete!!!");
+        }
 
         if (shakeTimer>=0){
 			Vector2 shakePos = Random.insideUnitCircle * shakeStrength;
