@@ -75,10 +75,6 @@ public class PlayerMovementController : MonoBehaviour {
 
         PlayerInput();
 
-        if(playerPos==EndPos){
-        	Debug.Log("Level Complete!!!");
-        }
-
         if (shakeTimer>=0){
 			Vector2 shakePos = Random.insideUnitCircle * shakeStrength;
 			Vector3 shakePlayerPos = Player.position;
@@ -259,6 +255,12 @@ public class PlayerMovementController : MonoBehaviour {
             StartCoroutine(HandleJumpHeight());
         }
         else shake(move.x==0);
+
+        //Check if Player Hits EndPortal
+        if(playerPos==EndPos){
+        	Debug.Log("Level Complete!!!");
+        	GetComponent<LevelManager>().loadNextLevel();
+        }
 	}
 
 	float shakeTimer;
@@ -369,7 +371,7 @@ public class PlayerMovementController : MonoBehaviour {
                     break;
             }
         }
-        else Debug.LogWarning("Character ANimator not found!");     
+        else Debug.LogWarning("Character Animator not found!");     
     }
 
 }

@@ -1,5 +1,6 @@
-﻿using UnityEngine.SceneManagement;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
 
@@ -7,38 +8,37 @@ public class LevelManager : MonoBehaviour {
 
 	private GameObject Level;
 	private GameObject EndPortal;
+	private PlayerMovementController Player;
+
 
 	void Awake(){
 		//EndPortal Resource
 		EndPortal=Resources.Load("Objects/EndPortalEffect") as GameObject;
 		//Init First Level
 		LevelID=PlayerPrefs.GetInt("currentLevelID");
-		Debug.Log("Levels/Level"+LevelID);
+		Player = GetComponent<PlayerMovementController>();
+		InitLevel(LevelID);
+	}
+
+	public void loadNextLevel(){
+		PlayerPrefs.SetInt("solvedLevel",LevelID);LevelID++;
+		GameObject nextLevel = Resources.Load("Levels/Level"+LevelID) as GameObject;
+		if(nextLevel!=null){
+			InitLevel(LevelID);
+		}else{StartCoroutine("leaveToMainMenu");}
+	}
+
+	private void InitLevel(int id){
 		Level = Instantiate(Resources.Load("Levels/Level"+LevelID) as GameObject);
 		Level LevelData=Level.GetComponent<Level>();
-		PlayerMovementController Player = GetComponent<PlayerMovementController>();
-
 		GameObject endPortal = Instantiate(EndPortal);
 		endPortal.transform.position = Player.SetBoard(LevelData.board, LevelData.StartPos, LevelData.EndPos);
 		endPortal.transform.parent = Level.transform;
 	}
 
-
-	void OnEnable(){
-		EventManager.LevelLoad += loadLevel;
-		EventManager.LevelUnload += unloadLevel;
-	}
-	void OnDisable(){
-		EventManager.LevelLoad -= loadLevel;
-		EventManager.LevelUnload -= unloadLevel;
-	}
-
-	private void loadLevel(string sceneName){
-		//Scene scene = SceneManager.GetSceneByName("Levels/"+sceneName);
-		//SceneManager.LoadScene(scene, LoadSceneMode.Additive);
-	}
-
-	private void unloadLevel(string sceneName){
-
+	IEnumerator leaveToMainMenu(){
+		float fadeSpeed = GetComponent<FadingEffect>().BeginFade(1);
+		yield return new WaitForSeconds(fadeSpeed);
+		SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
 	}
 }
