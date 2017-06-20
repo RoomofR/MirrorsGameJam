@@ -21,18 +21,18 @@ public class LevelManager : MonoBehaviour {
 		Player = GetComponent<PlayerMovementController>();
 		Cam = GetComponent<CameraMovementController>();
 		Mirror = GetComponent<MirrorFollow>();
-		InitLevel(LevelID);
+		InitLevel();
 	}
 
 	public void loadNextLevel(){
 		PlayerPrefs.SetInt("solvedLevel",LevelID);LevelID++;
 		GameObject nextLevel = Resources.Load("Levels/Level"+LevelID) as GameObject;
 		if(nextLevel!=null){
-			InitLevel(LevelID);
+			Invoke("InitLevel", 1);
 		}else{StartCoroutine("leaveToMainMenu");}
 	}
 
-	private void InitLevel(int id){
+	private void InitLevel(){
 		Level = Instantiate(Resources.Load("Levels/Level"+LevelID) as GameObject);
 		Level LevelData=Level.GetComponent<Level>();
 		GameObject endPortal = Instantiate(EndPortal);
@@ -42,6 +42,7 @@ public class LevelManager : MonoBehaviour {
 		Mirror.follow=true;
 		Cam.rotate=LevelData.CameraRotate;
 	}
+
 
 	IEnumerator leaveToMainMenu(){
 		float fadeSpeed = GetComponent<FadingEffect>().BeginFade(1);
