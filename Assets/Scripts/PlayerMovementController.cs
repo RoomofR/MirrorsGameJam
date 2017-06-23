@@ -16,7 +16,7 @@ public struct Key{
     public Key(Colors c, pos2D p){color=c;pos=p;}
 }
 
-public enum Colors {Red,Blue}
+public enum Colors {Red, Blue, Green, Orange, Yellow}
     // Used to send requests to the Animator to play animations
 public enum EAnimations {Idle, Jump, TurnLeft, TurnRight }
     // Used to handle turning and face direction of the character
@@ -29,6 +29,8 @@ public class PlayerMovementController : MonoBehaviour {
 	public Transform Player;
 	public pos2D playerPos;
 	public pos2D EndPos;
+    public Key[] keysPos;
+    public GameObject[] doorsPos;
 
 	[Header("Shake Options")]
 	public float shakeTime;
@@ -269,6 +271,17 @@ public class PlayerMovementController : MonoBehaviour {
         if(playerPos==EndPos){
         	Debug.Log("Level Complete!!!");
         	GetComponent<LevelManager>().loadNextLevel();
+        }
+        //Check if Player Hits Key
+        foreach(Key key in keysPos){
+            if(playerPos==key.pos){
+                foreach(GameObject door in doorsPos){
+                    Door d = door.GetComponent<Door>;
+                    if(d.color==key.color){
+                        d.trigger();
+                    }
+                }
+            }
         }
 	}
 

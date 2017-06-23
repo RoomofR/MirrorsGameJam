@@ -34,12 +34,15 @@ public class LevelManager : MonoBehaviour {
 
 	private void InitLevel(){
 		Level = Instantiate(Resources.Load("Levels/Level"+LevelID) as GameObject);
+		Level.transform.position = new Vector3(Level.transform.position.x,Level.transform.position.y,(LevelID-1)*10);
 		Level LevelData=Level.GetComponent<Level>();
 		GameObject endPortal = Instantiate(EndPortal);
 		endPortal.transform.position = Player.SetBoard(LevelData.board, LevelData.StartPos, LevelData.EndPos);
 		endPortal.transform.parent = Level.transform;
 		//Keys
-
+		if(LevelData.Keys.Length>0){
+			
+		}
 		//Other Settings
 		Mirror.follow=true;
 		Cam.rotate=LevelData.CameraRotate;
