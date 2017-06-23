@@ -15,6 +15,17 @@ public class Door : MonoBehaviour {
         SetParticleColour();
     }
 
+
+    #region TEMPORARY CODE
+
+    void Update() {
+        ToggleParticle();
+        SetParticleColour();
+    }
+    #endregion
+
+
+
     public void trigger(){
 		if(isOpen){
 			//doorObject.gameObject.SetActive(true);
@@ -27,13 +38,17 @@ public class Door : MonoBehaviour {
     }
 
     private void ToggleParticle() {
-        var mainDp = doorParticleWhite.main;
+        var mainW = doorParticleWhite.main;
+        var mainC = doorParticleColoured.main;
         if (!isOpen) {
-            mainDp.loop = true;
+            mainW.loop = true;
+            mainC.loop = true;
             doorParticleWhite.Play();
+            doorParticleColoured.Play();
         }
         else {
-            mainDp.loop = false;
+            mainW.loop = false;
+            mainC.loop = false;
         }
     }
 

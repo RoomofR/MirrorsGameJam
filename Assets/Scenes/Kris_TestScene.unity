@@ -52799,11 +52799,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1527576196377936, guid: 941112029878dc34fa65d0be418357eb, type: 2}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1215559649585926, guid: 941112029878dc34fa65d0be418357eb, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 941112029878dc34fa65d0be418357eb, type: 2}

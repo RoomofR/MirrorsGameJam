@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 4798624454889774}
   - component: {fileID: 198659871795479030}
   - component: {fileID: 199962746700794086}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DoorParticleSystem_Colour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: 0
   isOpen: 0
-  doorObject: {fileID: 0}
 --- !u!198 &198659871795479030
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -220,7 +219,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -2035606014
+  randomSeed: -1872439481
   InitialModule:
     serializedVersion: 3
     enabled: 1
