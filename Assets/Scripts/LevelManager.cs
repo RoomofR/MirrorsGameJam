@@ -41,7 +41,7 @@ public class LevelManager : MonoBehaviour {
 		endPortal.transform.parent = Level.transform;
 		//Keys
 		if(LevelData.Keys.Length>0){
-			
+			Player.setKeysDoor(LevelData.Keys,LevelData.Doors);
 		}
 		//Other Settings
 		Mirror.follow=true;

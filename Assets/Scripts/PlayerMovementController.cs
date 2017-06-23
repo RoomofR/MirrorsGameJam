@@ -243,6 +243,12 @@ public class PlayerMovementController : MonoBehaviour {
 		}
 	}
 
+    //Set Keys/Doors
+    public void setKeysDoor(Key[] k, GameObject[] d){
+        keysPos=k;
+        doorsPos=d;
+    }
+
 	//Moves...
 	private void movePlayer(pos2D move){
 		pos2D tempPos = playerPos;
@@ -273,12 +279,14 @@ public class PlayerMovementController : MonoBehaviour {
         	GetComponent<LevelManager>().loadNextLevel();
         }
         //Check if Player Hits Key
-        foreach(Key key in keysPos){
-            if(playerPos==key.pos){
-                foreach(GameObject door in doorsPos){
-                    Door d = door.GetComponent<Door>();
-                    if(d.color==key.color){
-                        d.trigger();
+        if(keysPos.Length>0){
+            foreach(Key key in keysPos){
+                if(playerPos==key.pos){
+                    foreach(GameObject door in doorsPos){
+                        Door d = door.GetComponent<Door>();
+                        if(d.color==key.color){
+                            d.trigger();
+                        }
                     }
                 }
             }
