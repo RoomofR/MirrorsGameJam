@@ -8,6 +8,15 @@ public struct pos2D{
 	public static bool operator ==(pos2D c1, pos2D c2) {return c1.Equals(c2);}
 	public static bool operator !=(pos2D c1, pos2D c2) {return !c1.Equals(c2);}
 }
+
+[System.Serializable]
+public struct Key{
+    public pos2D pos;
+    public Colors color;
+    public Key(Colors c, pos2D p){color=c;pos=p;}
+}
+
+public enum Colors {Red,Blue}
     // Used to send requests to the Animator to play animations
 public enum EAnimations {Idle, Jump, TurnLeft, TurnRight }
     // Used to handle turning and face direction of the character
