@@ -70,6 +70,18 @@ public class PlayerMovementController : MonoBehaviour {
     	return getTilePos(endPos.x,endPos.y,0.164f);
     }
 
+    //Set Keys/Doors
+    public Vector3[] SetKeysDoor(Key[] k, GameObject[] d){
+        keysPos=k;
+        doorsPos=d;
+        Vector3[] keyPositions = new Vector3[k.Length];int i=0;
+        foreach(Key key in k){
+            keyPositions[i] = getTilePos(key.pos.x,key.pos.y,0.164f);
+            i++;
+        }
+        return keyPositions;
+    }
+
     void Awake () {
 		//floorSpots=mapFloor();
 		//setPlayer(playerPos.x,playerPos.y);
@@ -242,12 +254,6 @@ public class PlayerMovementController : MonoBehaviour {
 			playerPos.y=y;
 		}
 	}
-
-    //Set Keys/Doors
-    public void setKeysDoor(Key[] k, GameObject[] d){
-        keysPos=k;
-        doorsPos=d;
-    }
 
 	//Moves...
 	private void movePlayer(pos2D move){

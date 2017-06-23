@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour {
 	public bool DebugLevel;
 	private GameObject Level;
 	private GameObject EndPortal;
+	private GameObject KEY;
 	private PlayerMovementController Player;
 	private CameraMovementController Cam;
 	private MirrorFollow Mirror;
@@ -16,6 +17,7 @@ public class LevelManager : MonoBehaviour {
 	void Awake(){
 		//EndPortal Resource
 		EndPortal=Resources.Load("Objects/EndPortalEffect") as GameObject;
+		//TODO DEFINE KEY KEY=Resources.Load("Objects/KEY") as GameObject;
 		//Init First Level
 		if(!DebugLevel){LevelID=PlayerPrefs.GetInt("currentLevelID");}
 		Player = GetComponent<PlayerMovementController>();
@@ -41,7 +43,13 @@ public class LevelManager : MonoBehaviour {
 		endPortal.transform.parent = Level.transform;
 		//Keys
 		if(LevelData.Keys.Length>0){
-			Player.setKeysDoor(LevelData.Keys,LevelData.Doors);
+			Vector3[] keysPos = Player.SetKeysDoor(LevelData.Keys,LevelData.Doors);
+			foreach(Vector3 pos in keysPos){
+				//TODO DEFINE KEY OBJECT IN RESOURCE
+				GameObject key = Instantiate(KEY);
+				key.transform.position = pos;
+				key.transform.parent = Level.transform;
+			}
 		}
 		//Other Settings
 		Mirror.follow=true;
