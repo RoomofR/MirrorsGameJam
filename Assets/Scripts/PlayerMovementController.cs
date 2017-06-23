@@ -268,11 +268,7 @@ public class PlayerMovementController : MonoBehaviour {
             Vector3 orig = new Vector3(Player.position.x, raycasYOffset, Player.position.z);
             Vector3 directionRay = getTilePos(tempPos.x, tempPos.y, raycasYOffset) - orig;
             RaycastHit hit;
-            Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
-            Debug.DrawRay(transform.position, forward, Color.green);
-
-            Debug.DrawRay(orig, directionRay*0.7f, Color.blue , 10f);
-
+            Debug.DrawRay(orig, directionRay*0.5f, Color.blue , 10f);
             if (Physics.Raycast(orig, directionRay, out hit, 0.5f) &&
                 hit.collider.GetComponent<Blockade>() != null) {
                 shake(move.x == 0);
