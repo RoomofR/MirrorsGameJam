@@ -1,17 +1,15 @@
 fileFormatVersion: 2
-guid: 99c42119ceb6f7d469d399b081eac290
-timeCreated: 1497903040
+guid: b2116cba365f78c4ba23d854ad087aa1
+timeCreated: 1498212956
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Pillar_A
-    100002: //RootNode
-    400000: Pillar_A
-    400002: //RootNode
-    2300000: Pillar_A
-    3300000: Pillar_A
-    4300000: Pillar_A
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Strut
   materials:
     importMaterials: 0
     materialName: 0
