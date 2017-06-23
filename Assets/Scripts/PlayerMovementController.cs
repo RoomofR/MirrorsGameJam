@@ -276,7 +276,7 @@ public class PlayerMovementController : MonoBehaviour {
         foreach(Key key in keysPos){
             if(playerPos==key.pos){
                 foreach(GameObject door in doorsPos){
-                    Door d = door.GetComponent<Door>;
+                    Door d = door.GetComponent<Door>();
                     if(d.color==key.color){
                         d.trigger();
                     }

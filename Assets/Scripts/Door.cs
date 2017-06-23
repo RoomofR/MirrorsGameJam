@@ -8,10 +8,10 @@ public class Door : MonoBehaviour {
 	
 	public void trigger(){
 		if(isOpen){
-			doorObject.GameObject.SetActive(true);
+			doorObject.gameObject.SetActive(true);
 			isOpen=false;
 		}else{
-			doorObject.SetActive(false);
+			doorObject.gameObject.SetActive(false);
 			isOpen=true;	
 		}
 	}
