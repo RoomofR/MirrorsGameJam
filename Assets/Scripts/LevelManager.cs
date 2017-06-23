@@ -38,6 +38,8 @@ public class LevelManager : MonoBehaviour {
 		GameObject endPortal = Instantiate(EndPortal);
 		endPortal.transform.position = Player.SetBoard(LevelData.board, LevelData.StartPos, LevelData.EndPos);
 		endPortal.transform.parent = Level.transform;
+		//Keys
+
 		//Other Settings
 		Mirror.follow=true;
 		Cam.rotate=LevelData.CameraRotate;
