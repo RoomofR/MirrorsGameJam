@@ -5319,8 +5319,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dac60167270090442b7ef49da9e094d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelID: 2
-  DebugLevel: 1
+  LevelID: 1
+  DebugLevel: 0
 --- !u!114 &1953271734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5365,6 +5365,8 @@ MonoBehaviour:
   EndPos:
     x: 0
     y: 0
+  keysPos: []
+  doorsPos: []
   shakeTime: 0.1
   shakeStrength: 0.04
   orientation:

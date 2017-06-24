@@ -1918,7 +1918,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1603818011789844}
-  m_Mesh: {fileID: 4300000, guid: b0e174c4f541a9343b23fd41fed8c4ea, type: 3}
+  m_Mesh: {fileID: 4300000, guid: ea90df7774db02d4a9384f83ffac8fff, type: 3}
 --- !u!33 &33268103334349296
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -2079,7 +2079,7 @@ MeshCollider:
   m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: b0e174c4f541a9343b23fd41fed8c4ea, type: 3}
+  m_Mesh: {fileID: 4300000, guid: ea90df7774db02d4a9384f83ffac8fff, type: 3}
 --- !u!114 &114826197892633786
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2094,6 +2094,7 @@ MonoBehaviour:
   levelID: 2
   board: {fileID: 4397676966680962}
   Keys: []
+  Doors: []
   Dimensions:
     x: 5
     y: 5
